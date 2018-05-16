@@ -9,9 +9,10 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            \Laravel\Passport\PassportServiceProvider::class,
             \Railken\Laravel\Manager\ManagerServiceProvider::class,
             \Railken\Laravel\App\AppServiceProvider::class,
+            \Railken\LaraOre\File\Tests\Laravel\App\FooServiceProvider::class,
+            \Spatie\MediaLibrary\MediaLibraryServiceProvider::class
         ];
     }
 
@@ -23,19 +24,27 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         $dotenv = new \Dotenv\Dotenv(__DIR__.'/..', '.env');
         $dotenv->load();
 
+
+
         parent::setUp();
 
-        /*File::cleanDirectory(database_path("migrations/"));
 
         $this->artisan('vendor:publish', [
-            '--provider' => 'Railken\LaraOre\Disk\DiskServiceProvider',
+            '--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider',
+            '--tag' => 'config'
+        ]);
+
+        File::cleanDirectory(database_path("migrations/"));
+
+        $this->artisan('vendor:publish', [
+            '--provider' => 'Railken\LaraOre\File\Tests\Laravel\App\FooServiceProvider',
             '--tag' => 'migrations'
         ]);
-        $this->artisan('vendor:publish', [
-            '--provider' => 'Railken\LaraOre\Disk\DiskServiceProvider',
-            '--tag' => 'config'
-        ]);*/
 
+        $this->artisan('vendor:publish', [
+            '--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider',
+            '--tag' => 'migrations'
+        ]);
         $this->artisan('migrate:fresh');
         $this->artisan('migrate');
     }

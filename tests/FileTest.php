@@ -3,7 +3,7 @@
 namespace Railken\LaraOre\File\Tests;
 
 use Railken\Bag;
-use Railken\LaraOre\File\Tests\Models\Foo;
+use Railken\LaraOre\File\Tests\Laravel\App\Foo;
 
 /**
  * Testing disk
@@ -22,12 +22,14 @@ class FileTest extends BaseTest
     {
     }
 
-
     public function testStorage()
     {
-        $foo = new Foo();
+        $foo = Foo::create();
 
-        $foo->addMedia(__DIR__ . "/files/1px.png")->toMediaCollection('images');
+        $foo->addMedia(__DIR__ . "/Laravel/storage/tardis.png")->preservingOriginal()->toMediaCollection('images');
+
+        $foo->getFirstMediaUrl('images', 'thumb');
+
     }
 
 }
