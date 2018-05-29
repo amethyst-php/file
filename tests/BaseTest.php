@@ -10,8 +10,8 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     {
         return [
             \Railken\Laravel\Manager\ManagerServiceProvider::class,
-            \Railken\Laravel\App\AppServiceProvider::class,
             \Railken\LaraOre\File\Tests\Laravel\App\FooServiceProvider::class,
+            \Railken\LaraOre\FileServiceProvider::class,
             \Spatie\MediaLibrary\MediaLibraryServiceProvider::class
         ];
     }
@@ -28,23 +28,22 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
 
         parent::setUp();
 
-
-        $this->artisan('vendor:publish', [
-            '--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider',
-            '--tag' => 'config'
-        ]);
-
         File::cleanDirectory(database_path("migrations/"));
 
         $this->artisan('vendor:publish', [
-            '--provider' => 'Railken\LaraOre\File\Tests\Laravel\App\FooServiceProvider',
-            '--tag' => 'migrations'
+            '--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider',
+            '--force' => true
         ]);
 
         $this->artisan('vendor:publish', [
-            '--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider',
-            '--tag' => 'migrations'
+            '--provider' => 'Railken\LaraOre\FileServiceProvider',
+            '--force' => true
         ]);
+
+        $this->artisan('vendor:publish', [
+            '--provider' => 'Railken\LaraOre\File\Tests\Laravel\App\FooServiceProvider',
+        ]);
+
         $this->artisan('migrate:fresh');
         $this->artisan('migrate');
     }
