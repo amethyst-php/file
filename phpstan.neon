@@ -3,4 +3,4 @@ parameters:
 	ignoreErrors:
 		- '#Call to an undefined static method Illuminate\\Support\\Facades\\([a-zA-Z0-9_]+)::([a-zA-Z0-9_]+)\(\)#'
 	excludes_analyse:
-		- %rootDir%/../../../src/Resources/Migrations/*
+		- %rootDir%/../../../tests/Laravel/database/migrations/*

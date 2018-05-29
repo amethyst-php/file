@@ -9,6 +9,9 @@ use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\Models\Media;
 use Railken\LaraOre\File\HasFileTrait;
 
+/**
+ * @method static mixed create()
+ */
 class Foo extends Model implements EntityContract, HasMedia
 {
     use HasMediaTrait;
