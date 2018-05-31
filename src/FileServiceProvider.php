@@ -23,4 +23,15 @@ class FileServiceProvider extends ServiceProvider
             ], 'migrations');
         }
     }
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->app->register(\Railken\Laravel\Manager\ManagerServiceProvider::class);
+        $this->app->register(\Spatie\MediaLibrary\MediaLibraryServiceProvider::class);
+    }
 }

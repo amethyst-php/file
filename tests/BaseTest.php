@@ -9,10 +9,8 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            \Railken\Laravel\Manager\ManagerServiceProvider::class,
-            \Railken\LaraOre\File\Tests\Laravel\App\FooServiceProvider::class,
             \Railken\LaraOre\FileServiceProvider::class,
-            \Spatie\MediaLibrary\MediaLibraryServiceProvider::class
+            \Railken\LaraOre\File\Tests\Laravel\App\FooServiceProvider::class,
         ];
     }
 
@@ -23,8 +21,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     {
         $dotenv = new \Dotenv\Dotenv(__DIR__.'/..', '.env');
         $dotenv->load();
-
-
 
         parent::setUp();
 
