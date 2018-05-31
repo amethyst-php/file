@@ -8,6 +8,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\Models\Media;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Facades\Config;
 
 /**
  * @property public $media
@@ -15,12 +16,13 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 class File extends Model implements EntityContract, HasMedia
 {
     use HasMediaTrait;
+    
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'ore_files';
+    protected $table;
 
     /**
      * The attributes that are mass assignable.
@@ -43,6 +45,16 @@ class File extends Model implements EntityContract, HasMedia
         'tags' => 'array',
     ];
 
+    /**
+     * Creates a new instance of the model.
+     *
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->table = Config::get('ore.file.table');
+    }
 
     public function registerMediaConversions(Media $media = null)
     {

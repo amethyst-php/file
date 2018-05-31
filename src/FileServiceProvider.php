@@ -33,5 +33,6 @@ class FileServiceProvider extends ServiceProvider
     {
         $this->app->register(\Railken\Laravel\Manager\ManagerServiceProvider::class);
         $this->app->register(\Spatie\MediaLibrary\MediaLibraryServiceProvider::class);
+        $this->mergeConfigFrom(__DIR__.'/../config/ore.file.php', 'ore.file');
     }
 }
