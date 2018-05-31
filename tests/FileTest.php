@@ -22,6 +22,7 @@ class FileTest extends BaseTest
         $fm = new FooManager();
 
         // Create a temporary file.
+        $result = $manager->uploadFileByContent("test", "test.txt");
         $result = $manager->uploadFile(__DIR__ . "/Laravel/storage/tardis.png");
 
         $this->assertEquals(true, $result->ok());

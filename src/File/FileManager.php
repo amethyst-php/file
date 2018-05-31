@@ -69,6 +69,22 @@ class FileManager extends ModelManager
     }
 
     /**
+     * Upload file By content
+     *
+     * @param string $content
+     * @param string $filename
+     *
+     * @return File
+     */
+    public function uploadFileByContent(string $content, string $filename = null)
+    {
+        $filename = sys_get_temp_dir() . "/" . $filename;
+        file_put_contents($filename, $content);
+
+        return $this->uploadFileFromFilesystem($filename);
+    }
+
+    /**
      * Upload a file from filesystem
      *
      * @param string $filename
