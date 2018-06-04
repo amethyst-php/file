@@ -17,11 +17,7 @@ class FileServiceProvider extends ServiceProvider
             __DIR__.'/../config/ore.file.php' => config_path('ore.file.php'),
         ], 'config');
 
-        if (!class_exists('CreateFilesTable')) {
-            $this->publishes([
-                __DIR__.'/../database/migrations/create_files_table.php.stub' => database_path('migrations/'.(new \DateTime())->format("Y_m_d_His.u").'_create_files_table.php'),
-            ], 'migrations');
-        }
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 
     /**

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Config;
 
 class CreateFilesTable extends Migration
 {
@@ -13,7 +14,7 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ore_files', function (Blueprint $table) {
+        Schema::create(Config::get('ore.file.table'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('token');
             $table->text('tags');
@@ -29,6 +30,6 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ore_files');
+        Schema::dropIfExists(Config::get('ore.file.table'));
     }
 }
