@@ -6,14 +6,11 @@ use Railken\Bag;
 use Railken\LaraOre\File\Tests\Laravel\App\Foo\Foo;
 use Railken\LaraOre\File\Tests\Laravel\App\Foo\FooManager;
 use Railken\LaraOre\File\FileManager;
+use Railken\LaraOre\Support\Testing\ManagerTestableTrait;
 
-/**
- * Testing disk
- * Attributes to fill are: name, driver, enabled, config.
- */
-class FileTest extends BaseTest
+class ManagerTest extends BaseTest
 {
-    use Traits\CommonTrait;
+    use ManagerTestableTrait;
     
 
     public function testFile()

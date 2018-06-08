@@ -3,6 +3,8 @@
 namespace Railken\LaraOre;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Config;
+use Railken\LaraOre\Api\Support\Router;
 
 class FileServiceProvider extends ServiceProvider
 {
@@ -18,6 +20,11 @@ class FileServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadRoutes();
+
+        config(['ore.user.permission.managers' => array_merge(Config::get('ore.user.permission.managers'), [
+            \Railken\LaraOre\File\FileManager::class,
+        ])]);
     }
 
     /**
@@ -29,6 +36,26 @@ class FileServiceProvider extends ServiceProvider
     {
         $this->app->register(\Railken\Laravel\Manager\ManagerServiceProvider::class);
         $this->app->register(\Spatie\MediaLibrary\MediaLibraryServiceProvider::class);
+        $this->app->register(\Railken\LaraOre\ApiServiceProvider::class);
+        $this->app->register(\Railken\LaraOre\UserServiceProvider::class);
+
         $this->mergeConfigFrom(__DIR__.'/../config/ore.file.php', 'ore.file');
+    }
+
+    /**
+     * Load routes.
+     *
+     * @return void
+     */
+    public function loadRoutes()
+    {
+        Router::group(array_merge(Config::get('ore.file.router'), [
+            'namespace' => 'Railken\LaraOre\Http\Controllers',
+        ]), function ($router) {
+            $router->get('/', ['uses' => 'FilesController@index']);
+            $router->post('/upload', ['uses' => 'FilesController@upload']);
+            $router->delete('/{id}', ['uses' => 'FilesController@remove']);
+            $router->get('/{id}', ['uses' => 'FilesController@show']);
+        });
     }
 }

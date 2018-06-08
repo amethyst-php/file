@@ -6,7 +6,10 @@
         "php": ">=7.1",
         "railken/bag": "^1.2",
         "railken/laravel-manager": "^3.1",
-        "spatie/laravel-medialibrary": "^7.0.0"
+        "spatie/laravel-medialibrary": "^7.0.0",
+        "railken/lara-ore-api": "dev-master",
+        "railken/lara-ore-support": "dev-master",
+        "railken/lara-ore-user": "dev-master"
 
     },
     "require-dev": {

@@ -15,10 +15,6 @@ class FooServiceProvider extends ServiceProvider
      */
     public function boot(\Illuminate\Routing\Router $router)
     {
-        if (!class_exists('CreateFooTable')) {
-            $this->publishes([
-                __DIR__.'/../database/migrations/create_foo_table.php' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_foo_table.php'),
-            ], 'migrations');
-        }
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 }
