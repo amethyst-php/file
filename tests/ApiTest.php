@@ -60,7 +60,7 @@ class ApiTest extends BaseTest
         // POST /
         $response = $this->post($url.'/upload', $parameters->toArray());
         $this->assertOrPrint($response, 201);
-        $resource = json_decode($response)->resource->id;
+        $resource = json_decode($response->getContent())->resource;
 
         // GET /id
         $response = $this->get($url.'/'.$resource->id);
