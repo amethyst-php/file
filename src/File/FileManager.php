@@ -3,7 +3,6 @@
 namespace Railken\LaraOre\File;
 
 use Railken\Laravel\Manager\Contracts\AgentContract;
-use Railken\Laravel\Manager\Contracts\ManagerContract;
 use Railken\Laravel\Manager\Contracts\EntityContract;
 use Railken\Laravel\Manager\ModelManager;
 use Railken\Laravel\Manager\Tokens;
@@ -69,7 +68,7 @@ class FileManager extends ModelManager
     }
 
     /**
-     * Upload file By content
+     * Upload file By content.
      *
      * @param string $content
      * @param string $filename
@@ -78,14 +77,14 @@ class FileManager extends ModelManager
      */
     public function uploadFileByContent(string $content, string $filename = null)
     {
-        $filename = sys_get_temp_dir() . "/" . $filename;
+        $filename = sys_get_temp_dir().'/'.$filename;
         file_put_contents($filename, $content);
 
         return $this->uploadFileFromFilesystem($filename);
     }
 
     /**
-     * Upload a file from filesystem
+     * Upload a file from filesystem.
      *
      * @param string $filename
      *
@@ -103,6 +102,7 @@ class FileManager extends ModelManager
     public function assignToModel(File $file, EntityContract $entity, array $extra)
     {
         $file->model()->associate($entity);
+
         return $this->update($file, $extra);
     }
 }

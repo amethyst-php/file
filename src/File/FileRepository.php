@@ -19,7 +19,7 @@ class FileRepository extends ModelRepository
     }
 
     /**
-     * Generate a new token
+     * Generate a new token.
      *
      * @return string
      */
@@ -33,7 +33,7 @@ class FileRepository extends ModelRepository
     }
 
     /**
-     * Find a file by token
+     * Find a file by token.
      *
      * @param string $token
      *

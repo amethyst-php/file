@@ -2,8 +2,6 @@
 
 namespace Railken\LaraOre\File\Tests\Laravel\App;
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class FooServiceProvider extends ServiceProvider

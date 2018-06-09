@@ -3,12 +3,12 @@
 namespace Railken\LaraOre\File;
 
 use Illuminate\Database\Eloquent\Model;
-use Railken\Laravel\Manager\Contracts\EntityContract;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\Models\Media;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Config;
+use Railken\Laravel\Manager\Contracts\EntityContract;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\Models\Media;
 
 /**
  * @property public $media
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Config;
 class File extends Model implements EntityContract, HasMedia
 {
     use HasMediaTrait;
-    
+
     /**
      * The table associated with the model.
      *
