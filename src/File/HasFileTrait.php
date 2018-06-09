@@ -2,8 +2,6 @@
 
 namespace Railken\LaraOre\File;
 
-use Illuminate\Support\Collection;
-
 trait HasFileTrait
 {
     /**

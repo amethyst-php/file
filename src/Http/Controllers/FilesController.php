@@ -2,10 +2,10 @@
 
 namespace Railken\LaraOre\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Railken\LaraOre\Api\Http\Controllers\RestController;
 use Railken\LaraOre\Api\Http\Controllers\Traits as RestTraits;
 use Railken\LaraOre\File\FileManager;
-use Illuminate\Http\Request;
 
 class FilesController extends RestController
 {
@@ -20,7 +20,7 @@ class FilesController extends RestController
         'tags',
         'token',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     protected static $fillable = [
@@ -49,10 +49,9 @@ class FilesController extends RestController
     {
         return $this->manager->repository->getQuery();
     }
-    
 
     /**
-     * Upload an image
+     * Upload an image.
      *
      * @param \Illuminate\Http\Request $request
      *
@@ -61,11 +60,11 @@ class FilesController extends RestController
     public function upload(Request $request)
     {
         $result = $this->manager->uploadFileByContent($request->input('file'), $request->input('name'));
- 
+
         if (!$result->ok()) {
             return $this->error(['errors' => $result->getSimpleErrors()]);
         }
- 
+
         return $this->success(['resource' => $this->manager->serializer->serialize($result->getResource())->toArray()], 201);
     }
 }

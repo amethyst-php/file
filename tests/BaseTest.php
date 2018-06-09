@@ -23,8 +23,9 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     public function getParameters()
     {
         $bag = new Bag();
-        $bag->set('name', "test.txt");
+        $bag->set('name', 'test.txt');
         $bag->set('file', str_random(40));
+
         return $bag;
     }
 
@@ -38,26 +39,25 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
 
         parent::setUp();
 
-        File::cleanDirectory(database_path("migrations/"));
-        
+        File::cleanDirectory(database_path('migrations/'));
+
         $this->artisan('migrate:fresh');
 
         $this->artisan('vendor:publish', [
             '--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider',
-            '--force' => true
+            '--force'    => true,
         ]);
 
         $this->artisan('lara-ore:user:install');
-        
+
         $this->artisan('vendor:publish', [
             '--provider' => 'Railken\LaraOre\FileServiceProvider',
-            '--force' => true
+            '--force'    => true,
         ]);
 
         $this->artisan('vendor:publish', [
             '--provider' => 'Railken\LaraOre\File\Tests\Laravel\App\FooServiceProvider',
         ]);
-
 
         $this->artisan('migrate');
     }

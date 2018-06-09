@@ -26,12 +26,12 @@ class ApiTest extends BaseTest
         ]);
 
         $access_token = json_decode($response->getContent())->data->access_token;
-        
+
         $this->withHeaders(['Authorization' => 'Bearer '.$access_token]);
 
         return $response;
     }
-    
+
     /**
      * Test common requests.
      *
@@ -48,28 +48,28 @@ class ApiTest extends BaseTest
         if (!$check) {
             $check = $parameters;
         }
-        
-        # GET /
+
+        // GET /
         $response = $this->get($url, []);
         $this->assertOrPrint($response, 200);
 
-        # GET /
+        // GET /
         $response = $this->get($url, ['query' => 'id eq 1']);
         $this->assertOrPrint($response, 200);
-        
-        # POST /
-        $response = $this->post($url . "/upload", $parameters->toArray());
+
+        // POST /
+        $response = $this->post($url.'/upload', $parameters->toArray());
         $this->assertOrPrint($response, 201);
         $resource = json_decode($response)->resource->id;
-        
-        # GET /id
-        $response = $this->get($url . "/". $resource->id);
+
+        // GET /id
+        $response = $this->get($url.'/'.$resource->id);
         $this->assertOrPrint($response, 200);
-       
-        # DELETE /id
-        $response = $this->delete($url . "/". $resource->id);
+
+        // DELETE /id
+        $response = $this->delete($url.'/'.$resource->id);
         $this->assertOrPrint($response, 204);
-        $response = $this->get($url . "/". $resource->id);
+        $response = $this->get($url.'/'.$resource->id);
         $this->assertOrPrint($response, 404);
     }
 }

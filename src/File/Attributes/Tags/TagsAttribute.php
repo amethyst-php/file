@@ -5,7 +5,6 @@ namespace Railken\LaraOre\File\Attributes\Tags;
 use Railken\Laravel\Manager\Attributes\BaseAttribute;
 use Railken\Laravel\Manager\Contracts\EntityContract;
 use Railken\Laravel\Manager\Tokens;
-use Respect\Validation\Validator as v;
 
 class TagsAttribute extends BaseAttribute
 {
@@ -65,7 +64,7 @@ class TagsAttribute extends BaseAttribute
     }
 
     /**
-     * Retrieve default value
+     * Retrieve default value.
      *
      * @param EntityContract $entity
      *

@@ -10,11 +10,11 @@ return [
     'table' => 'ore_files',
 
     'router' => [
-        'prefix' => 'admin/files',
+        'prefix'      => 'admin/files',
         'middlewares' => [
             \Railken\LaraOre\RequestLoggerMiddleware::class,
             'auth:api',
-        ]
-    ]
+        ],
+    ],
 
 ];

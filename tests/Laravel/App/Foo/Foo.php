@@ -3,11 +3,11 @@
 namespace Railken\LaraOre\File\Tests\Laravel\App\Foo;
 
 use Illuminate\Database\Eloquent\Model;
-use Railken\Laravel\Manager\Contracts\EntityContract;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\Models\Media;
 use Railken\LaraOre\File\HasFileTrait;
+use Railken\Laravel\Manager\Contracts\EntityContract;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\Models\Media;
 
 /**
  * @method static mixed create()
