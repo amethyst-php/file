@@ -1,7 +1,8 @@
 # lara-ore-file
 
-[![Build Status](https://travis-ci.org/railken/lara-ore-file.svg?branch=master)](https://travis-ci.org/railken/lara-ore-file)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://img.shields.io/travis/railken/lara-ore-file/master.svg?style=flat-square)](https://travis-ci.org/railken/lara-ore-file)
+[![StyleCI](https://github.styleci.io/repos/133656933/shield?branch=master)](https://github.styleci.io/repos/133656933)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 # Requirements
 
