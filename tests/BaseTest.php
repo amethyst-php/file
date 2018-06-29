@@ -48,7 +48,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
             '--force'    => true,
         ]);
 
-        $this->artisan('lara-ore:user:install');
 
         $this->artisan('vendor:publish', [
             '--provider' => 'Railken\LaraOre\FileServiceProvider',

@@ -9,7 +9,7 @@
         "spatie/laravel-medialibrary": "^7.0.0",
         "railken/lara-ore-api": "dev-master",
         "railken/lara-ore-support": "dev-master",
-        "railken/lara-ore-user": "dev-master"
+        "railken/lara-ore-support": "dev-master"
 
     },
     "require-dev": {
