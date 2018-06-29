@@ -11,10 +11,6 @@ return [
 
     'router' => [
         'prefix'      => '/admin/files',
-        'middlewares' => [
-            \Railken\LaraOre\RequestLoggerMiddleware::class,
-            'auth:api',
-        ],
     ],
 
 ];
