@@ -4,6 +4,7 @@ namespace Railken\LaraOre\File\Tests;
 
 use Illuminate\Support\Facades\Config;
 use Railken\LaraOre\Support\Testing\ApiTestableTrait;
+use Railken\LaraOre\File\FileFaker;
 
 class ApiTest extends BaseTest
 {
@@ -26,7 +27,7 @@ class ApiTest extends BaseTest
      */
     public function testSuccessCommon()
     {
-        $this->commonTest($this->getBaseUrl(), $parameters = $this->getParameters());
+        $this->commonTest($this->getBaseUrl(), FileFaker::make());
     }
 
     public function commonTest($url, $parameters, $check = null)

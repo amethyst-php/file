@@ -16,20 +16,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     }
 
     /**
-     * Retrieve correct bag of parameters.
-     *
-     * @return Bag
-     */
-    public function getParameters()
-    {
-        $bag = new Bag();
-        $bag->set('name', 'test.txt');
-        $bag->set('file', str_random(40));
-
-        return $bag;
-    }
-
-    /**
      * Setup the test environment.
      */
     public function setUp()
