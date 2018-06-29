@@ -48,13 +48,13 @@ class FileServiceProvider extends ServiceProvider
      */
     public function loadRoutes()
     {
-        Router::group(array_merge(Config::get('ore.file.router'), [
-            'namespace' => 'Railken\LaraOre\Http\Controllers',
-        ]), function ($router) {
-            $router->get('/', ['uses' => 'FilesController@index']);
-            $router->post('/upload', ['uses' => 'FilesController@upload']);
-            $router->delete('/{id}', ['uses' => 'FilesController@remove']);
-            $router->get('/{id}', ['uses' => 'FilesController@show']);
+        Router::group(Config::get('ore.file.http.router'), function ($router) {
+            $controller = Config::get('ore.file.http.controller');
+            
+            $router->get('/', ['uses' => $controller.'@index']);
+            $router->post('/upload', ['uses' => $controller.'@upload']);
+            $router->delete('/{id}', ['uses' => $controller.'@remove']);
+            $router->get('/{id}', ['uses' => $controller.'@show']);
         });
     }
 }

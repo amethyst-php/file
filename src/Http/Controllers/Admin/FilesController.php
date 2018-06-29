@@ -1,18 +1,30 @@
 <?php
 
-namespace Railken\LaraOre\Http\Controllers;
+namespace Railken\LaraOre\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Railken\LaraOre\Api\Http\Controllers\RestController;
+use Railken\LaraOre\Api\Http\Controllers\RestConfigurableController;
 use Railken\LaraOre\Api\Http\Controllers\Traits as RestTraits;
 use Railken\LaraOre\File\FileManager;
 
-class FilesController extends RestController
+class FilesController extends RestConfigurableController
 {
     use RestTraits\RestIndexTrait;
     use RestTraits\RestShowTrait;
     use RestTraits\RestRemoveTrait;
 
+    /**
+     * The config path
+     *
+     * @var string
+     */
+    public $config = 'ore.file';
+
+    /**
+     * The attributes that are queryable.
+     *
+     * @var array
+     */
     public $queryable = [
         'id',
         'model_type',
@@ -31,31 +43,9 @@ class FilesController extends RestController
     ];
 
     /**
-     * Construct.
-     */
-    public function __construct(FileManager $manager)
-    {
-        $this->manager = $manager;
-        $this->manager->setAgent($this->getUser());
-        parent::__construct();
-    }
-
-    /**
-     * Create a new instance for query.
+     * The attributes that are fillable.
      *
-     * @return \Illuminate\Database\Query\Builder
-     */
-    public function getQuery()
-    {
-        return $this->manager->repository->getQuery();
-    }
-
-    /**
-     * Upload an image.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
+     * @var array
      */
     public function upload(Request $request)
     {

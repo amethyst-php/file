@@ -6,6 +6,7 @@ use Railken\Laravel\Manager\Contracts\AgentContract;
 use Railken\Laravel\Manager\Contracts\EntityContract;
 use Railken\Laravel\Manager\ModelManager;
 use Railken\Laravel\Manager\Tokens;
+use Illuminate\Support\Facades\Config;
 
 class FileManager extends ModelManager
 {
@@ -45,10 +46,20 @@ class FileManager extends ModelManager
      */
     public function __construct(AgentContract $agent = null)
     {
-        $this->setRepository(new FileRepository($this));
-        $this->setSerializer(new FileSerializer($this));
-        $this->setAuthorizer(new FileAuthorizer($this));
-        $this->setValidator(new FileValidator($this));
+        $this->entity = Config::get('ore.file.entity');
+        $this->attributes = array_merge($this->attributes, array_values(Config::get('ore.file.attributes')));
+        
+        $classRepository = Config::get('ore.file.repository');
+        $this->setRepository(new $classRepository($this));
+
+        $classSerializer = Config::get('ore.file.serializer');
+        $this->setSerializer(new $classSerializer($this));
+
+        $classAuthorizer = Config::get('ore.file.authorizer');
+        $this->setAuthorizer(new $classAuthorizer($this));
+
+        $classValidator = Config::get('ore.file.validator');
+        $this->setValidator(new $classValidator($this));
 
         parent::__construct($agent);
     }

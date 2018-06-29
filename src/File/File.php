@@ -53,7 +53,8 @@ class File extends Model implements EntityContract, HasMedia
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->table = Config::get('ore.file.table');
+        $this->table = \Illuminate\Support\Facades\Config::get('ore.file.table');
+        $this->fillable = array_merge($this->fillable, array_keys(Config::get('ore.file.attributes')));
     }
 
     public function registerMediaConversions(Media $media = null)
