@@ -48,12 +48,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
             '--force'    => true,
         ]);
 
-
-        $this->artisan('vendor:publish', [
-            '--provider' => 'Railken\LaraOre\FileServiceProvider',
-            '--force'    => true,
-        ]);
-
         $this->artisan('vendor:publish', [
             '--provider' => 'Railken\LaraOre\File\Tests\Laravel\App\FooServiceProvider',
         ]);
