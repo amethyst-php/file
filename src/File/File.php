@@ -11,7 +11,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\Models\Media;
 
 /**
- * @property public $media
+ * @property \Spatie\MediaLibrary\Models\Media $media
  */
 class File extends Model implements EntityContract, HasMedia
 {

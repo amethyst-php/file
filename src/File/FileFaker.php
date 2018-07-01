@@ -8,7 +8,7 @@ use Faker\Factory;
 class FileFaker
 {
     /**
-     * @return array
+     * @return \Railken\Bag
      */
     public static function make()
     {
