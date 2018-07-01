@@ -69,7 +69,7 @@ class FileManager extends ModelManager
      *
      * @param mixed $raw_file
      *
-     * @return File
+     * @return \Railken\Laravel\Manager\Contracts\ResultContract
      */
     public function uploadFile($raw_file)
     {
@@ -84,7 +84,7 @@ class FileManager extends ModelManager
      * @param string $content
      * @param string $filename
      *
-     * @return File
+     * @return \Railken\Laravel\Manager\Contracts\ResultContract
      */
     public function uploadFileByContent(string $content, string $filename = null)
     {
@@ -99,7 +99,7 @@ class FileManager extends ModelManager
      *
      * @param string $filename
      *
-     * @return File
+     * @return \Railken\Laravel\Manager\Contracts\ResultContract
      */
     public function uploadFileFromFilesystem(string $filename)
     {
