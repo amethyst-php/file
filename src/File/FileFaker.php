@@ -4,13 +4,19 @@ namespace Railken\LaraOre\File;
 
 use Railken\Bag;
 use Faker\Factory;
+use Railken\Laravel\Manager\BaseFaker;
 
-class FileFaker
+class FileFaker extends BaseFaker
 {
+    /**
+     * @var string
+     */
+    protected $manager = FileManager::class;
+
     /**
      * @return \Railken\Bag
      */
-    public static function make()
+    public function parameters()
     {
         $faker = Factory::create();
         
