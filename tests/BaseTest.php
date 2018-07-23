@@ -3,18 +3,9 @@
 namespace Railken\LaraOre\File\Tests;
 
 use Illuminate\Support\Facades\File;
-use Railken\Bag;
 
 abstract class BaseTest extends \Orchestra\Testbench\TestCase
 {
-    protected function getPackageProviders($app)
-    {
-        return [
-            \Railken\LaraOre\FileServiceProvider::class,
-            \Railken\LaraOre\File\Tests\Laravel\App\FooServiceProvider::class,
-        ];
-    }
-
     /**
      * Setup the test environment.
      */
@@ -39,5 +30,13 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         ]);
 
         $this->artisan('migrate');
+    }
+
+    protected function getPackageProviders($app)
+    {
+        return [
+            \Railken\LaraOre\FileServiceProvider::class,
+            \Railken\LaraOre\File\Tests\Laravel\App\FooServiceProvider::class,
+        ];
     }
 }

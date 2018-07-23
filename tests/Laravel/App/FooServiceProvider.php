@@ -8,8 +8,6 @@ class FooServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot(\Illuminate\Routing\Router $router)
     {

@@ -3,8 +3,8 @@
 namespace Railken\LaraOre\File\Tests;
 
 use Illuminate\Support\Facades\Config;
-use Railken\LaraOre\Support\Testing\ApiTestableTrait;
 use Railken\LaraOre\File\FileFaker;
+use Railken\LaraOre\Support\Testing\ApiTestableTrait;
 
 class ApiTest extends BaseTest
 {
@@ -17,13 +17,11 @@ class ApiTest extends BaseTest
      */
     public function getBaseUrl()
     {
-        return Config::get('ore.api.router.prefix').Config::get('ore.file.http.router.prefix');
+        return Config::get('ore.api.router.prefix').Config::get('ore.file.http.admin.router.prefix');
     }
 
     /**
      * Test common requests.
-     *
-     * @return void
      */
     public function testSuccessCommon()
     {

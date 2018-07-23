@@ -2,6 +2,7 @@
 
 namespace Railken\LaraOre;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Railken\LaraOre\Api\Support\Router;
@@ -10,8 +11,6 @@ class FileServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot()
     {
@@ -29,8 +28,6 @@ class FileServiceProvider extends ServiceProvider
 
     /**
      * Register any application services.
-     *
-     * @return void
      */
     public function register()
     {
@@ -43,18 +40,20 @@ class FileServiceProvider extends ServiceProvider
 
     /**
      * Load routes.
-     *
-     * @return void
      */
     public function loadRoutes()
     {
-        Router::group(Config::get('ore.file.http.router'), function ($router) {
-            $controller = Config::get('ore.file.http.controller');
-            
-            $router->get('/', ['uses' => $controller.'@index']);
-            $router->post('/upload', ['uses' => $controller.'@upload']);
-            $router->delete('/{id}', ['uses' => $controller.'@remove']);
-            $router->get('/{id}', ['uses' => $controller.'@show']);
-        });
+        $config = Config::get('ore.file.http.admin');
+
+        if (Arr::get($config, 'enabled')) {
+            Router::group('admin', Arr::get($config, 'router'), function ($router) use ($config) {
+                $controller = Arr::get($config, 'controller');
+
+                $router->get('/', ['uses' => $controller.'@index']);
+                $router->post('/upload', ['uses' => $controller.'@upload']);
+                $router->delete('/{id}', ['uses' => $controller.'@remove']);
+                $router->get('/{id}', ['uses' => $controller.'@show']);
+            });
+        }
     }
 }

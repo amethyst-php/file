@@ -2,11 +2,11 @@
 
 namespace Railken\LaraOre\File;
 
+use Illuminate\Support\Facades\Config;
 use Railken\Laravel\Manager\Contracts\AgentContract;
 use Railken\Laravel\Manager\Contracts\EntityContract;
 use Railken\Laravel\Manager\ModelManager;
 use Railken\Laravel\Manager\Tokens;
-use Illuminate\Support\Facades\Config;
 
 class FileManager extends ModelManager
 {
@@ -48,7 +48,7 @@ class FileManager extends ModelManager
     {
         $this->entity = Config::get('ore.file.entity');
         $this->attributes = array_merge($this->attributes, array_values(Config::get('ore.file.attributes')));
-        
+
         $classRepository = Config::get('ore.file.repository');
         $this->setRepository(new $classRepository($this));
 

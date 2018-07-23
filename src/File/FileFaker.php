@@ -2,8 +2,8 @@
 
 namespace Railken\LaraOre\File;
 
-use Railken\Bag;
 use Faker\Factory;
+use Railken\Bag;
 use Railken\Laravel\Manager\BaseFaker;
 
 class FileFaker extends BaseFaker
@@ -19,7 +19,7 @@ class FileFaker extends BaseFaker
     public function parameters()
     {
         $faker = Factory::create();
-        
+
         $bag = new Bag();
         $bag->set('name', 'test.txt');
         $bag->set('file', str_random(40));
