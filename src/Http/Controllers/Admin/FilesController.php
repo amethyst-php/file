@@ -1,59 +1,39 @@
 <?php
 
-namespace Railken\LaraOre\Http\Controllers\Admin;
+namespace Railken\Amethyst\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Railken\LaraOre\Api\Http\Controllers\RestConfigurableController;
-use Railken\LaraOre\Api\Http\Controllers\Traits as RestTraits;
+use Railken\Amethyst\Api\Http\Controllers\RestManagerController;
+use Railken\Amethyst\Api\Http\Controllers\Traits as RestTraits;
+use Railken\Amethyst\Managers\FileManager;
 
-class FilesController extends RestConfigurableController
+class FilesController extends RestManagerController
 {
     use RestTraits\RestIndexTrait;
     use RestTraits\RestShowTrait;
+    use RestTraits\RestUpdateTrait;
     use RestTraits\RestRemoveTrait;
 
     /**
-     * The config path.
+     * The class of the manager.
      *
      * @var string
      */
-    public $config = 'ore.file';
-
-    /**
-     * The attributes that are queryable.
-     *
-     * @var array
-     */
-    public $queryable = [
-        'id',
-        'model_type',
-        'model_id',
-        'tags',
-        'token',
-        'created_at',
-        'updated_at',
-    ];
-
-    public $fillable = [
-        'model_type',
-        'model_id',
-        'tags',
-        'token',
-    ];
+    public $class = FileManager::class;
 
     /**
      * The attributes that are fillable.
      *
      * @var array
      */
-    public function upload(Request $request)
+    public function create(Request $request)
     {
-        $result = $this->manager->uploadFileByContent($request->input('file'), $request->input('name'));
+        $result = $this->getManager()->uploadFileByContent($request->input('file'), $request->input('name'));
 
         if (!$result->ok()) {
             return $this->error(['errors' => $result->getSimpleErrors()]);
         }
 
-        return $this->success(['resource' => $this->manager->serializer->serialize($result->getResource())->toArray()], 201);
+        return $this->success(['data' => $this->getManager()->getSerializer()->serialize($result->getResource())->toArray()], 201);
     }
 }

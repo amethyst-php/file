@@ -1,8 +1,9 @@
 <?php
 
-namespace Railken\LaraOre\File\Tests;
+namespace Railken\Amethyst\Tests;
 
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Schema;
 
 abstract class BaseTest extends \Orchestra\Testbench\TestCase
 {
@@ -24,19 +25,20 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
             '--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider',
             '--force'    => true,
         ]);
-
-        $this->artisan('vendor:publish', [
-            '--provider' => 'Railken\LaraOre\File\Tests\Laravel\App\FooServiceProvider',
-        ]);
-
         $this->artisan('migrate');
+        Schema::dropIfExists('foo');
+        Schema::create('foo', function ($table) {
+            $table->increments('id');
+            $table->string('name')->nullable();
+            $table->timestamps();
+        });
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            \Railken\LaraOre\FileServiceProvider::class,
-            \Railken\LaraOre\File\Tests\Laravel\App\FooServiceProvider::class,
+            \Railken\Amethyst\Providers\FileServiceProvider::class,
+            \Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
         ];
     }
 }
