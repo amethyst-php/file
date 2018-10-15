@@ -4,8 +4,7 @@ namespace Railken\Amethyst\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Support\Facades\Config;
-use Railken\Amethyst\Schemas\FileSchema;
+use Railken\Amethyst\Common\ConfigurableModel;
 use Railken\Lem\Contracts\EntityContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -16,39 +15,17 @@ use Spatie\MediaLibrary\Models\Media;
  */
 class File extends Model implements EntityContract, HasMedia
 {
-    use HasMediaTrait;
+    use HasMediaTrait, ConfigurableModel;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'model_type',
-        'model_id',
-        'tags',
-        'token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'tags' => 'array',
-    ];
-
-    /**
-     * Creates a new instance of the model.
+     * Create a new Eloquent model instance.
      *
      * @param array $attributes
      */
     public function __construct(array $attributes = [])
     {
+        $this->ini('amethyst.file.data.file');
         parent::__construct($attributes);
-        $this->table = Config::get('amethyst.file.managers.file.table');
-        // $this->fillable = (new FileSchema())->getNameFillableAttributes();
     }
 
     public function registerMediaConversions(Media $media = null)

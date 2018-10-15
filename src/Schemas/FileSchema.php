@@ -19,10 +19,11 @@ class FileSchema extends Schema
             Attributes\TextAttribute::make('token')->setDefault(function ($entity, $attribute) {
                 return $attribute->getManager()->getRepository()->generateToken();
             }),
-            Attributes\ObjectAttribute::make('tags'),
+            Attributes\TextAttribute::make('model_type'),
+            Attributes\NumberAttribute::make('model_id'),
+            Attributes\ArrayAttribute::make('tags'),
             Attributes\CreatedAtAttribute::make(),
             Attributes\UpdatedAtAttribute::make(),
-            Attributes\DeletedAtAttribute::make(),
         ];
     }
 }

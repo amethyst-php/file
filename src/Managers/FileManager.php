@@ -2,27 +2,19 @@
 
 namespace Railken\Amethyst\Managers;
 
-use Illuminate\Support\Facades\Config;
+use Railken\Amethyst\Common\ConfigurableManager;
 use Railken\Amethyst\Models\File;
 use Railken\Lem\Contracts\EntityContract;
 use Railken\Lem\Manager;
 
 class FileManager extends Manager
 {
-    /**
-     * Describe this manager.
-     *
-     * @var string
-     */
-    public $comment = '...';
+    use ConfigurableManager;
 
     /**
-     * Register Classes.
+     * @var string
      */
-    public function registerClasses()
-    {
-        return Config::get('amethyst.file.managers.file');
-    }
+    protected $config = 'amethyst.file.data.file';
 
     /**
      * Upload a file.
