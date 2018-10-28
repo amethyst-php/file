@@ -25,9 +25,9 @@ class FileTest extends BaseTest
     protected $group = 'admin';
 
     /**
-     * Base path config.
+     * Base Route.
      *
      * @var string
      */
-    protected $config = 'amethyst.file.http.admin.file';
+    protected $route = 'admin.file';
 }

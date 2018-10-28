@@ -26,6 +26,13 @@ class FileTest extends BaseTest
      */
     protected $faker = FileFaker::class;
 
+    public function testUploadFileByContent()
+    {
+        $manager = new FileManager();
+        $result = $manager->uploadFileByContent('test');
+        $this->assertEquals(true, $result->ok());
+    }
+
     public function testFile()
     {
         $manager = new FileManager();

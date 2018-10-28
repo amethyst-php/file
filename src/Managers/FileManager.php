@@ -6,6 +6,7 @@ use Railken\Amethyst\Common\ConfigurableManager;
 use Railken\Amethyst\Models\File;
 use Railken\Lem\Contracts\EntityContract;
 use Railken\Lem\Manager;
+use Ramsey\Uuid\Uuid;
 
 class FileManager extends Manager
 {
@@ -40,8 +41,17 @@ class FileManager extends Manager
      */
     public function uploadFileByContent(string $content, string $filename = null)
     {
-        $filename = sys_get_temp_dir().'/'.$filename;
-        file_put_contents($filename, $content);
+        $dir = sys_get_temp_dir();
+
+        $tmp = $dir.'/'.Uuid::uuid4()->toString();
+
+        file_put_contents($tmp, $content);
+
+        if (!$filename) {
+            $filename = Uuid::uuid4()->toString().'.'.$this->guessExtension($tmp);
+        }
+
+        rename($tmp, $filename);
 
         return $this->uploadFileFromFilesystem($filename);
     }
@@ -67,5 +77,27 @@ class FileManager extends Manager
         $file->model()->associate($entity);
 
         return $this->update($file, $extra);
+    }
+
+    /**
+     * Guess extension from filename.
+     *
+     * @param string $filename
+     *
+     * @return string
+     */
+    public function guessExtension(string $filename)
+    {
+        $repository = new \Dflydev\ApacheMimeTypes\PhpRepository();
+
+        $mimeType = mime_content_type($filename);
+
+        $extensions = $repository->findExtensions($mimeType);
+
+        if (count($extensions) === 0) {
+            throw new \Exception(sprintf('Cannot find a valid extension for %s', $mimeType));
+        }
+
+        return $extensions[0];
     }
 }

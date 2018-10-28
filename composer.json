@@ -5,13 +5,13 @@
     "require": {
         "php": ">=7.1",
         "railken/amethyst-common": "0.1.*",
-        "spatie/laravel-medialibrary": "^7.0.0"
+        "spatie/laravel-medialibrary": "^7.0.0",
+        "ramsey/uuid": "^3.8",
+        "dflydev/apache-mime-types": "^1.0"
     },
     "require-dev": {
-        "phpstan/phpstan": "^0.10",
         "phpunit/phpunit": "~7.0",
-        "orchestra/testbench": "3.6.*",
-        "friendsofphp/php-cs-fixer": "^2.8.1"
+        "orchestra/testbench": "3.6.*"
     },
     "autoload": {
         "psr-4" : {
