@@ -48,7 +48,7 @@ class FileManager extends Manager
         file_put_contents($tmp, $content);
 
         if (!$filename) {
-            $filename = Uuid::uuid4()->toString().'.'.$this->guessExtension($tmp);
+            $filename = $dir.'/'.Uuid::uuid4()->toString().'.'.$this->guessExtension($tmp);
         }
 
         rename($tmp, $filename);
