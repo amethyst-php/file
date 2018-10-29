@@ -28,7 +28,7 @@ class FilesController extends RestManagerController
      */
     public function create(Request $request)
     {
-        $result = $this->getManager()->uploadFileByContent($request->input('file'), $request->input('name'));
+        $result = $this->getManager()->uploadFileByContent(base64_decode($request->input('file')), $request->input('name'));
 
         if (!$result->ok()) {
             return $this->error(['errors' => $result->getSimpleErrors()]);
