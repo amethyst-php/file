@@ -14,8 +14,9 @@ class CreateFilesTable extends Migration
     {
         Schema::create(Config::get('amethyst.file.data.file.table'), function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->string('path')->nullable();
             $table->string('token');
-            $table->text('tags');
             $table->nullableMorphs('model');
             $table->timestamps();
         });

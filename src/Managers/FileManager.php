@@ -6,6 +6,7 @@ use Railken\Amethyst\Common\ConfigurableManager;
 use Railken\Amethyst\Models\File;
 use Railken\Lem\Contracts\EntityContract;
 use Railken\Lem\Manager;
+use Railken\Lem\Result;
 use Ramsey\Uuid\Uuid;
 
 class FileManager extends Manager
@@ -20,26 +21,31 @@ class FileManager extends Manager
     /**
      * Upload a file.
      *
+     * @param File $file
      * @param mixed $raw_file
      *
      * @return \Railken\Lem\Contracts\ResultContract
      */
-    public function uploadFile($raw_file)
+    public function uploadFile(File $file, $raw_file)
     {
+        $result = new Result();
+
         if (file_exists($raw_file)) {
-            return $this->uploadFileFromFilesystem($raw_file);
+            return $this->uploadFileFromFilesystem($file, $raw_file);
         }
+
+        return $result;
     }
 
     /**
      * Upload file By content.
      *
+     * @param File $file
      * @param string $content
-     * @param string $filename
      *
      * @return \Railken\Lem\Contracts\ResultContract
      */
-    public function uploadFileByContent(string $content, string $filename = null)
+    public function uploadFileByContent(File $file, string $content)
     {
         $dir = sys_get_temp_dir();
 
@@ -47,36 +53,65 @@ class FileManager extends Manager
 
         file_put_contents($tmp, $content);
 
+        $filename = $file->name;
+
         if (!$filename) {
-            $filename = $dir.'/'.Uuid::uuid4()->toString().'.'.$this->guessExtension($tmp);
+            $filename = Uuid::uuid4()->toString().'.'.$this->guessExtension($tmp);
         }
+
+        $filename = $dir.'/'.$filename;
 
         rename($tmp, $filename);
 
-        return $this->uploadFileFromFilesystem($filename);
+        return $this->uploadFileFromFilesystem($file, $filename);
     }
 
     /**
      * Upload a file from filesystem.
      *
-     * @param string $filename
+     * @param File $file
+     * @param string $path
      *
      * @return \Railken\Lem\Contracts\ResultContract
      */
-    public function uploadFileFromFilesystem(string $filename)
+    public function uploadFileFromFilesystem(File $file, string $path)
     {
-        $result = $this->create([]);
-        $resource = $result->getResource();
-        $resource->addMedia($filename)->preservingOriginal()->toMediaCollection('default');
+        $result = new Result();
+        $this->update($file, ['path' => $path]);
+        $file->addMedia($file->path)->toMediaCollection('default');
 
         return $result;
     }
 
-    public function assignToModel(File $file, EntityContract $entity, array $extra)
+    public function assignToModel(File $file, EntityContract $entity, array $tagNames)
     {
-        $file->model()->associate($entity);
+        $result = new Result();
 
-        return $this->update($file, $extra);
+        $tagManager = new TagManager();
+        $tagEntityManager = new TagEntityManager();
+
+        $parentTag = $tagManager->findOrCreate([
+            'name' => 'files'
+        ])->getResource();
+
+        foreach ($tagNames as $tagName) {
+            $tag = $tagManager->findOrCreate([
+                'name' => $tagName,
+                'parent_id' => $parentTag->id
+            ])->getResource();
+
+            $tagEntityManager->findOrCreate([
+                'tag_id' => $tag->id,
+                'taggable_type' => File::class,
+                'taggable_id' => $file->id
+            ]);
+        }
+
+        $file->model()->associate($entity);
+        $file->save();
+
+        return $result;
+
     }
 
     /**
@@ -88,9 +123,17 @@ class FileManager extends Manager
      */
     public function guessExtension(string $filename)
     {
-        $repository = new \Dflydev\ApacheMimeTypes\PhpRepository();
-
         $mimeType = mime_content_type($filename);
+
+        return $this->findExtension($mimeType);
+    }
+
+    /**
+     * @var string
+     */
+    public function findExtension(string $mimeType)
+    {
+        $repository = new \Dflydev\ApacheMimeTypes\PhpRepository();
 
         $extensions = $repository->findExtensions($mimeType);
 
@@ -99,5 +142,17 @@ class FileManager extends Manager
         }
 
         return $extensions[0];
+    }
+
+    /**
+     * Generate random name by mime type.
+     *
+     * @param string $mimeType
+     *
+     * @return string
+     */
+    public function randomNameByMimeType(string $mimeType)
+    {
+        return Uuid::uuid4()->toString().'.'.$this->findExtension($mimeType);
     }
 }

@@ -5,6 +5,7 @@ namespace Railken\Amethyst\Tests\Http\Admin;
 use Railken\Amethyst\Api\Support\Testing\TestableBaseTrait;
 use Railken\Amethyst\Fakers\FileFaker;
 use Railken\Amethyst\Tests\BaseTest;
+use Illuminate\Http\UploadedFile;
 
 class FileTest extends BaseTest
 {
@@ -30,4 +31,21 @@ class FileTest extends BaseTest
      * @var string
      */
     protected $route = 'admin.file';
+
+
+    /**
+     * Test upload.
+     */
+    public function testHttpUpload()
+    {
+        $response = $this->callAndTest('POST', route('admin.file.create'), [
+            'name'        => 'test.txt',
+        ], 201);
+        $body = json_decode($response->getContent());
+
+        $response = $this->callAndTest('POST', route('admin.file.upload', ['id' => $body->data->id]), [
+            'file' => UploadedFile::fake()->image('text.txt')
+        ], 200);
+        $body = json_decode($response->getContent());
+    }
 }

@@ -17,7 +17,6 @@ class FileFaker extends Faker
 
         $bag = new Bag();
         $bag->set('name', 'test.txt');
-        $bag->set('file', str_random(40));
 
         return $bag;
     }

@@ -10,6 +10,7 @@ use Railken\Amethyst\Managers\FileManager;
 class FilesController extends RestManagerController
 {
     use RestTraits\RestIndexTrait;
+    use RestTraits\RestCreateTrait;
     use RestTraits\RestShowTrait;
     use RestTraits\RestUpdateTrait;
     use RestTraits\RestRemoveTrait;
@@ -24,11 +25,30 @@ class FilesController extends RestManagerController
     /**
      * The attributes that are fillable.
      *
-     * @var array
+     * @param mixed   $id
+     * @param Request $request
      */
-    public function create(Request $request)
+    public function upload($id, Request $request)
     {
-        $result = $this->getManager()->uploadFileByContent($request->getContent());
+        $entity = $this->getQuery()->where('id', $id)->first();
+
+        if (!$entity) {
+            return $this->response(null, Response::HTTP_NOT_FOUND);
+        }
+
+        /**
+         * @var FileManager
+         */
+        $manager = $this->getManager();
+
+        if ($request->file('file') === null) {
+            return $this->error(['errors' => ['message' => 'Missing file']]);
+        }
+
+        $result = $manager->uploadFileByContent(
+            $entity,
+            $request->file('file')
+        );
 
         if (!$result->ok()) {
             return $this->error(['errors' => $result->getSimpleErrors()]);
