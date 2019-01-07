@@ -55,7 +55,7 @@ class File extends Model implements EntityContract, HasMedia
     {
         return $this->media[0]->getFullUrl($name);
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

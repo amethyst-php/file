@@ -19,8 +19,7 @@ trait HasFileTrait
     public function getFiles(array $tags)
     {
         $collection = $this->files->filter(function ($file) use ($tags) {
-
-            return count(array_intersect($file->tags->map(function($tag) {
+            return count(array_intersect($file->tags->map(function ($tag) {
                 return $tag->tag->name;
             })->toArray(), $tags)) > 0;
         });

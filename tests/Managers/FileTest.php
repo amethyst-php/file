@@ -29,7 +29,10 @@ class FileTest extends BaseTest
     public function testUploadFileByContent()
     {
         $manager = new FileManager();
-        $result = $manager->uploadFileByContent('test');
+
+        $resource = $manager->create(FileFaker::make()->parameters())->getResource();
+
+        $result = $manager->uploadFileByContent($resource, 'test');
         $this->assertEquals(true, $result->ok());
     }
 
@@ -40,7 +43,6 @@ class FileTest extends BaseTest
         $path = __DIR__.'/../Laravel/storage/tardis.txt';
         file_put_contents($path, 'Allons-y!');
 
-
         $resource = $manager->create(FileFaker::make()->parameters())->getResource();
 
         // Create a temporary file.
@@ -48,7 +50,6 @@ class FileTest extends BaseTest
         $result = $manager->uploadFile($resource, $path);
 
         $this->assertEquals(true, $result->ok());
-
 
         $this->assertEquals(true, filter_var($resource->getFullUrl(), FILTER_VALIDATE_URL) ? true : false);
 

@@ -2,6 +2,7 @@
 
 namespace Railken\Amethyst\Managers;
 
+use Illuminate\Support\Collection;
 use Railken\Amethyst\Common\ConfigurableManager;
 use Railken\Amethyst\Models\File;
 use Railken\Lem\Contracts\EntityContract;
@@ -21,7 +22,7 @@ class FileManager extends Manager
     /**
      * Upload a file.
      *
-     * @param File $file
+     * @param File  $file
      * @param mixed $raw_file
      *
      * @return \Railken\Lem\Contracts\ResultContract
@@ -40,7 +41,7 @@ class FileManager extends Manager
     /**
      * Upload file By content.
      *
-     * @param File $file
+     * @param File   $file
      * @param string $content
      *
      * @return \Railken\Lem\Contracts\ResultContract
@@ -69,15 +70,14 @@ class FileManager extends Manager
     /**
      * Upload a file from filesystem.
      *
-     * @param File $file
+     * @param File   $file
      * @param string $path
      *
      * @return \Railken\Lem\Contracts\ResultContract
      */
     public function uploadFileFromFilesystem(File $file, string $path)
     {
-        $result = new Result();
-        $this->update($file, ['path' => $path]);
+        $result = $this->update($file, ['path' => $path]);
         $file->addMedia($file->path)->toMediaCollection('default');
 
         return $result;
@@ -91,27 +91,28 @@ class FileManager extends Manager
         $tagEntityManager = new TagEntityManager();
 
         $parentTag = $tagManager->findOrCreate([
-            'name' => 'files'
+            'name' => 'files',
         ])->getResource();
 
         foreach ($tagNames as $tagName) {
             $tag = $tagManager->findOrCreate([
-                'name' => $tagName,
-                'parent_id' => $parentTag->id
+                'name'      => $tagName,
+                'parent_id' => $parentTag->id,
             ])->getResource();
 
             $tagEntityManager->findOrCreate([
-                'tag_id' => $tag->id,
+                'tag_id'        => $tag->id,
                 'taggable_type' => File::class,
-                'taggable_id' => $file->id
+                'taggable_id'   => $file->id,
             ]);
         }
 
         $file->model()->associate($entity);
         $file->save();
 
-        return $result;
+        $result->setResources(Collection::make($file));
 
+        return $result;
     }
 
     /**
