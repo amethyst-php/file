@@ -45,7 +45,7 @@ class FilesController extends RestManagerController
             return $this->error(['errors' => ['message' => 'Missing file']]);
         }
 
-        $result = $manager->uploadFileByContent(
+        $result = $manager->uploadFile(
             $entity,
             $request->file('file')
         );
