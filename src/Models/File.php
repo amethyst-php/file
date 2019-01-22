@@ -44,7 +44,7 @@ class File extends Model implements EntityContract, HasMedia
         return $this->morphTo();
     }
 
-    /*
+    /**
      * Get the full url to a original media file.
      *
      * @param string $name
@@ -54,6 +54,18 @@ class File extends Model implements EntityContract, HasMedia
     public function getFullUrl(string $name = '')
     {
         return $this->media[0]->getFullUrl($name);
+    }
+
+    /**
+     * Get url downloadable
+     *
+     * @return string
+     */
+    public function downloadable()
+    {
+        return $this->media[0]->disk === 's3' 
+            ? $this->media[0]->getTemporaryUrl(new \DateTime('+1 hour')) 
+            : $this->media[0]->getFullUrl();
     }
 
     /**
