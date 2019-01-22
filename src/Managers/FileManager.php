@@ -10,6 +10,9 @@ use Railken\Lem\Manager;
 use Railken\Lem\Result;
 use Ramsey\Uuid\Uuid;
 
+/**
+ * @method \Railken\Amethyst\Repositories\FileRepository getRepository()
+ */
 class FileManager extends Manager
 {
     use ConfigurableManager;

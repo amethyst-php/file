@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use Railken\Amethyst\Api\Http\Controllers\RestManagerController;
 use Railken\Amethyst\Api\Http\Controllers\Traits as RestTraits;
 use Railken\Amethyst\Managers\FileManager;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @method \Railken\Amethyst\Managers\FileManager getManager()
+ */
 class FilesController extends RestManagerController
 {
     use RestTraits\RestIndexTrait;
@@ -27,18 +31,17 @@ class FilesController extends RestManagerController
      *
      * @param mixed   $id
      * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function upload($id, Request $request)
     {
         $entity = $this->getQuery()->where('id', $id)->first();
 
         if (!$entity) {
-            return $this->response(null, Response::HTTP_NOT_FOUND);
+            return $this->response([], Response::HTTP_NOT_FOUND);
         }
 
-        /**
-         * @var FileManager
-         */
         $manager = $this->getManager();
 
         if ($request->file('file') === null) {

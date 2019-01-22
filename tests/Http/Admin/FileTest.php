@@ -37,9 +37,7 @@ class FileTest extends BaseTest
      */
     public function testHttpUpload()
     {
-        $response = $this->callAndTest('POST', route('admin.file.create'), [
-            'name' => 'test.txt',
-        ], 201);
+        $response = $this->callAndTest('POST', route('admin.file.create'), [], 201);
         $body = json_decode($response->getContent());
 
         $response = $this->callAndTest('POST', route('admin.file.upload', ['id' => $body->data->id]), [

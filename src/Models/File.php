@@ -12,6 +12,8 @@ use Spatie\MediaLibrary\Models\Media;
 
 /**
  * @property \Spatie\MediaLibrary\Models\Media $media
+ * @property string                            $name
+ * @property string                            $path
  */
 class File extends Model implements EntityContract, HasMedia
 {
@@ -69,7 +71,7 @@ class File extends Model implements EntityContract, HasMedia
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function tags()
     {
