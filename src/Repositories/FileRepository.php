@@ -37,7 +37,7 @@ class FileRepository extends Repository
      *
      * @param string $token
      *
-     * @return File|null|object
+     * @return File|object|null
      */
     public function findByToken(string $token)
     {

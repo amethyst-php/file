@@ -35,11 +35,11 @@ return [
     'http' => [
         'admin' => [
             'file' => [
-                'enabled'     => true,
-                'controller'  => Railken\Amethyst\Http\Controllers\Admin\FilesController::class,
-                'router'      => [
-                    'as'        => 'file.',
-                    'prefix'    => '/files',
+                'enabled'    => true,
+                'controller' => Railken\Amethyst\Http\Controllers\Admin\FilesController::class,
+                'router'     => [
+                    'as'     => 'file.',
+                    'prefix' => '/files',
                 ],
             ],
         ],
