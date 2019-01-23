@@ -65,9 +65,17 @@ class File extends Model implements EntityContract, HasMedia
      */
     public function downloadable()
     {
-        return $this->media[0]->disk === 's3'
-            ? $this->media[0]->getTemporaryUrl(new \DateTime('+1 hour'))
-            : $this->media[0]->getFullUrl();
+        $media = $this->media[0];
+
+        if ($media->disk === 's3') {
+            return $media->getTemporaryUrl(new \DateTime('+1 hour'));
+        }
+
+        if (in_array($media->disk, ['local', 'public'], true)) {
+            return $media->getPath();
+        }
+
+        return $media->getFullUrl();
     }
 
     /**
