@@ -20,6 +20,7 @@ class FileSerializer extends Serializer
     {
         $bag = parent::serialize($entity, $select);
         $bag->set('url', $entity->getFullUrl());
+        $bag->set('media', $entity->media->count() > 0 ? $entity->media[0]->toArray() : null);
 
         return $bag;
     }
