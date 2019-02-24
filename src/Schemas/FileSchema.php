@@ -21,8 +21,7 @@ class FileSchema extends Schema
                 ->setDefault(function ($entity, $attribute) {
                     return Uuid::uuid4()->toString();
                 })
-                ->setRequired(true)
-                ->setUnique(true),
+                ->setRequired(true),
             Attributes\TextAttribute::make('path'),
             Attributes\TextAttribute::make('token')->setDefault(function ($entity, $attribute) {
                 return $attribute->getManager()->getRepository()->generateToken();
