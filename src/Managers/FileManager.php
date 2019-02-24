@@ -80,8 +80,14 @@ class FileManager extends Manager
      */
     public function uploadFileFromFilesystem(File $file, string $path)
     {
-        $result = $this->update($file, ['path' => $path]);
-        $file->addMedia($file->path)->toMediaCollection('default');
+        $dir = sys_get_temp_dir();
+
+        $filename = $dir.'/'.Uuid::uuid4()->toString().'.'.$this->guessExtension($path);
+
+        rename($path, $filename);
+
+        $result = $this->update($file, ['path' => $filename]);
+        $file->addMedia($result->getResource()->path)->toMediaCollection('default');
 
         return $result;
     }
