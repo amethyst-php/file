@@ -19,8 +19,7 @@ class FileSerializer extends Serializer
     public function serialize(EntityContract $entity, Collection $select = null)
     {
         $bag = parent::serialize($entity, $select);
-
-        // ...
+        $bag->set('url', $entity->getFullUrl());
 
         return $bag;
     }

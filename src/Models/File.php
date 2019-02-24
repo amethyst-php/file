@@ -55,7 +55,7 @@ class File extends Model implements EntityContract, HasMedia
      */
     public function getFullUrl(string $name = '')
     {
-        return $this->media[0]->getFullUrl($name);
+        return $this->media[0]->disk === 's3' ? $this->media[0]->getTemporaryUrl(new \DateTime('+1 hour')) : $this->media[0]->getFullUrl($name);
     }
 
     /**
