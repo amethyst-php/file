@@ -3,6 +3,7 @@
 namespace Railken\Amethyst\Traits;
 
 use Railken\Amethyst\Models\File;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait HasFileTrait
 {
@@ -11,7 +12,7 @@ trait HasFileTrait
      *
      * @return mixed
      */
-    public function files()
+    public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'model');
     }

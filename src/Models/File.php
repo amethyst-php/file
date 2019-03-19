@@ -4,6 +4,8 @@ namespace Railken\Amethyst\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Railken\Amethyst\Common\ConfigurableModel;
 use Railken\Lem\Contracts\EntityContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
@@ -41,7 +43,7 @@ class File extends Model implements EntityContract, HasMedia
     /**
      * @return MorphTo
      */
-    public function model()
+    public function model(): MorphTo
     {
         return $this->morphTo();
     }
@@ -87,7 +89,7 @@ class File extends Model implements EntityContract, HasMedia
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function tags()
+    public function tags(): MorphMany
     {
         return $this->morphMany(TagEntity::class, 'taggable');
     }

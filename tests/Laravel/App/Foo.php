@@ -3,6 +3,8 @@
 namespace Railken\Amethyst\Tests\Laravel\App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Railken\Amethyst\Traits\HasFileTrait;
 use Railken\Lem\Contracts\EntityContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
