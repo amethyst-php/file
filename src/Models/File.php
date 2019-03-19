@@ -3,9 +3,8 @@
 namespace Railken\Amethyst\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Railken\Amethyst\Common\ConfigurableModel;
 use Railken\Lem\Contracts\EntityContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
@@ -61,8 +60,8 @@ class File extends Model implements EntityContract, HasMedia
             return null;
         }
 
-        return $this->media[0]->disk === 's3' 
-            ? $this->media[0]->getTemporaryUrl(new \DateTime('+1 hour')) 
+        return $this->media[0]->disk === 's3'
+            ? $this->media[0]->getTemporaryUrl(new \DateTime('+1 hour'))
             : $this->media[0]->getFullUrl($name);
     }
 
