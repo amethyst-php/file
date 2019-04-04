@@ -90,6 +90,6 @@ class File extends Model implements EntityContract, HasMedia
      */
     public function tags(): MorphMany
     {
-        return $this->morphMany(TagEntity::class, 'taggable');
+        return $this->morphMany(Taxonomable::class, 'taxonomable');
     }
 }

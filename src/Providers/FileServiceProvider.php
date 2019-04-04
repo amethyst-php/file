@@ -21,9 +21,9 @@ class FileServiceProvider extends CommonServiceProvider
         $this->loadExtraRoutes();
 
         $this->app->register(\Spatie\MediaLibrary\MediaLibraryServiceProvider::class);
-        $this->app->register(\Railken\Amethyst\Providers\TagServiceProvider::class);
+        $this->app->register(\Railken\Amethyst\Providers\TaxonomyServiceProvider::class);
 
-        Config::set('amethyst.tag.data.tag-entity.taggables.'.File::class, FileManager::class);
+        Config::set('amethyst.taxonomy.data.taxonomable.attributes.taxonomable.options.'.File::class, FileManager::class);
     }
 
     /**

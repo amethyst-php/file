@@ -21,7 +21,7 @@ trait HasFileTrait
     {
         $collection = $this->files->filter(function ($file) use ($tags) {
             return count(array_intersect($file->tags->map(function ($tag) {
-                return $tag->tag->name;
+                return $tag->taxonomy->name;
             })->toArray(), $tags)) > 0;
         });
 

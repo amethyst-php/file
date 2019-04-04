@@ -96,23 +96,23 @@ class FileManager extends Manager
     {
         $result = new Result();
 
-        $tagManager = new TagManager();
-        $tagEntityManager = new TagEntityManager();
+        $taxonomyManager = new TaxonomyManager();
+        $taxonomableManager = new TaxonomableManager();
 
-        $parentTag = $tagManager->findOrCreate([
+        $parentTag = $taxonomyManager->findOrCreate([
             'name' => 'files',
         ])->getResource();
 
         foreach ($tagNames as $tagName) {
-            $tag = $tagManager->findOrCreate([
+            $tag = $taxonomyManager->findOrCreate([
                 'name'      => $tagName,
                 'parent_id' => $parentTag->id,
             ])->getResource();
 
-            $tagEntityManager->findOrCreate([
-                'tag_id'        => $tag->id,
-                'taggable_type' => File::class,
-                'taggable_id'   => $file->id,
+            $taxonomableManager->findOrCreate([
+                'taxonomy_id'        => $tag->id,
+                'taxonomable_type' => File::class,
+                'taxonomable_id'   => $file->id,
             ]);
         }
 
