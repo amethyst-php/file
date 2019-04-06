@@ -4,4 +4,4 @@ return [
     'name' => 'File',
     'description' => 'File',
     'attributes' => []
-]
+];
