@@ -110,7 +110,7 @@ class FileManager extends Manager
             ])->getResource();
 
             $taxonomableManager->findOrCreate([
-                'taxonomy_id'        => $tag->id,
+                'taxonomy_id'      => $tag->id,
                 'taxonomable_type' => File::class,
                 'taxonomable_id'   => $file->id,
             ]);

@@ -6,8 +6,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Railken\Amethyst\Api\Support\Router;
 use Railken\Amethyst\Common\CommonServiceProvider;
-use Railken\Amethyst\Managers\FileManager;
-use Railken\Amethyst\Models\File;
 
 class FileServiceProvider extends CommonServiceProvider
 {
