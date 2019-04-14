@@ -22,12 +22,18 @@ class FileSchema extends Schema
                     return Uuid::uuid4()->toString();
                 })
                 ->setRequired(true),
-            Attributes\TextAttribute::make('path'),
+            Attributes\TextAttribute::make('path')
+                ->setFillable(false),
             Attributes\TextAttribute::make('token')->setDefault(function ($entity, $attribute) {
                 return $attribute->getManager()->getRepository()->generateToken();
-            }),
-            Attributes\TextAttribute::make('model_type'),
-            Attributes\NumberAttribute::make('model_id'),
+            })->setFillable(false),
+            Attributes\EnumAttribute::make('model_type', app('amethyst')->getMorphListable('file', 'model'))
+                ->setRequired(true),
+            Attributes\MorphToAttribute::make('model_id')
+                ->setRelationKey('model_type')
+                ->setRelationName('model')
+                ->setRelations(app('amethyst')->getMorphRelationable('file', 'model'))
+                ->setRequired(true),
             Attributes\CreatedAtAttribute::make(),
             Attributes\UpdatedAtAttribute::make(),
         ];

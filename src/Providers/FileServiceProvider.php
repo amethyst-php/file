@@ -2,6 +2,7 @@
 
 namespace Railken\Amethyst\Providers;
 
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Railken\Amethyst\Api\Support\Router;
@@ -22,6 +23,10 @@ class FileServiceProvider extends CommonServiceProvider
         $this->app->register(\Railken\Amethyst\Providers\TaxonomyServiceProvider::class);
 
         app('amethyst')->pushMorphRelation('taxonomable', 'taxonomable', 'file');
+
+        \Illuminate\Database\Eloquent\Builder::macro('files', function (): MorphMany {
+            return app('amethyst')->createMacroMorphRelation($this, \Railken\Amethyst\Models\File::class, 'files', 'model');
+        });
     }
 
     /**

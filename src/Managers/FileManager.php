@@ -86,10 +86,12 @@ class FileManager extends Manager
 
         rename($path, $filename);
 
-        $result = $this->update($file, ['path' => $filename]);
-        $file->addMedia($result->getResource()->path)->toMediaCollection('default');
+        $file->path = $filename;
+        $file->save();
 
-        return $result;
+        $file->addMedia($file->path)->toMediaCollection('default');
+
+        return new Result();
     }
 
     public function assignToModel(File $file, EntityContract $entity, array $tagNames)
@@ -164,5 +166,20 @@ class FileManager extends Manager
     public function randomNameByMimeType(string $mimeType)
     {
         return Uuid::uuid4()->toString().'.'.$this->findExtension($mimeType);
+    }
+
+    /**
+     * Describe extra actions
+     *
+     * @return array
+     */
+    public function getDescriptor()
+    {
+        return [
+            'file' => [
+                'type' => 'file',
+                'action' => 'upload'
+            ]
+        ];
     }
 }
