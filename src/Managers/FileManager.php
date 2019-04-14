@@ -91,7 +91,10 @@ class FileManager extends Manager
 
         $file->addMedia($file->path)->toMediaCollection('default');
 
-        return new Result();
+        $result = new Result();
+        $result->setResources(Collection::make([$file]));
+
+        return $result;
     }
 
     public function assignToModel(File $file, EntityContract $entity, array $tagNames)
