@@ -172,7 +172,7 @@ class FileManager extends Manager
     }
 
     /**
-     * Describe extra actions
+     * Describe extra actions.
      *
      * @return array
      */
@@ -180,9 +180,9 @@ class FileManager extends Manager
     {
         return [
             'file' => [
-                'type' => 'file',
-                'action' => 'upload'
-            ]
+                'type'   => 'file',
+                'action' => 'upload',
+            ],
         ];
     }
 }

@@ -34,7 +34,6 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         });
 
         app('amethyst')->pushMorphRelation('file', 'model', 'foo');
-
     }
 
     protected function getPackageProviders($app)
