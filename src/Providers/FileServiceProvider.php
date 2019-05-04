@@ -21,7 +21,15 @@ class FileServiceProvider extends CommonServiceProvider
 
         $this->app->register(\Spatie\MediaLibrary\MediaLibraryServiceProvider::class);
         $this->app->register(\Railken\Amethyst\Providers\TaxonomyServiceProvider::class);
+    }
 
+    /**
+     * @inherit
+     */
+    public function boot()
+    {
+        parent::boot();
+        
         app('amethyst')->pushMorphRelation('taxonomable', 'taxonomable', 'file');
 
         \Illuminate\Database\Eloquent\Builder::macro('files', function (): MorphMany {
