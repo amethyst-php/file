@@ -29,7 +29,7 @@ class FileServiceProvider extends CommonServiceProvider
     public function boot()
     {
         parent::boot();
-        
+
         app('amethyst')->pushMorphRelation('taxonomable', 'taxonomable', 'file');
 
         \Illuminate\Database\Eloquent\Builder::macro('files', function (): MorphMany {
