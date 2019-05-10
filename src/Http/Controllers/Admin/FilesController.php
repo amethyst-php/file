@@ -36,7 +36,7 @@ class FilesController extends RestManagerController
      */
     public function upload($id, Request $request)
     {
-        $entity = $this->getQuery()->where('id', $id)->first();
+        $entity = $this->getEntityById($id);
 
         if (!$entity) {
             return $this->response([], Response::HTTP_NOT_FOUND);
