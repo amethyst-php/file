@@ -18,7 +18,8 @@ use Spatie\MediaLibrary\Models\Media;
  */
 class File extends Model implements EntityContract, HasMedia
 {
-    use HasMediaTrait, ConfigurableModel;
+    use HasMediaTrait;
+    use ConfigurableModel;
 
     /**
      * Create a new Eloquent model instance.

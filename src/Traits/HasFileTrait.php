@@ -3,7 +3,6 @@
 namespace Railken\Amethyst\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Railken\Amethyst\Models\File;
 
 trait HasFileTrait
 {
