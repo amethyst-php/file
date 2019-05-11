@@ -90,6 +90,6 @@ class File extends Model implements EntityContract, HasMedia
      */
     public function tags(): MorphMany
     {
-        return $this->morphMany(Taxonomable::class, 'taxonomable');
+        return $this->morphMany(config('amethyst.taxonomy.data.taxonomable.model'), 'taxonomable');
     }
 }

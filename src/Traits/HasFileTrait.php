@@ -14,7 +14,7 @@ trait HasFileTrait
      */
     public function files(): MorphMany
     {
-        return $this->morphMany(File::class, 'model');
+        return $this->morphMany(config('amethyst.file.data.file.model'), 'model');
     }
 
     public function getFiles(array $tags)
