@@ -9,6 +9,7 @@ use Railken\Lem\Contracts\EntityContract;
 use Railken\Lem\Manager;
 use Railken\Lem\Result;
 use Ramsey\Uuid\Uuid;
+use Closure;
 
 /**
  * @method \Railken\Amethyst\Repositories\FileRepository getRepository()
@@ -27,15 +28,16 @@ class FileManager extends Manager
      *
      * @param File  $file
      * @param mixed $raw_file
+     * @param Closure $media
      *
      * @return \Railken\Lem\Contracts\ResultContract
      */
-    public function uploadFile(File $file, $raw_file)
+    public function uploadFile(File $file, $raw_file, Closure $media = null)
     {
         $result = new Result();
 
         if (file_exists($raw_file)) {
-            return $this->uploadFileFromFilesystem($file, $raw_file);
+            return $this->uploadFileFromFilesystem($file, $raw_file, $media);
         }
 
         return $result;
@@ -46,10 +48,11 @@ class FileManager extends Manager
      *
      * @param File   $file
      * @param string $content
+     * @param Closure $media
      *
      * @return \Railken\Lem\Contracts\ResultContract
      */
-    public function uploadFileByContent(File $file, string $content)
+    public function uploadFileByContent(File $file, string $content, Closure $media = null)
     {
         $dir = sys_get_temp_dir();
 
@@ -67,7 +70,7 @@ class FileManager extends Manager
 
         rename($tmp, $filename);
 
-        return $this->uploadFileFromFilesystem($file, $filename);
+        return $this->uploadFileFromFilesystem($file, $filename, $media);
     }
 
     /**
@@ -75,10 +78,11 @@ class FileManager extends Manager
      *
      * @param File   $file
      * @param string $path
+     * @param Closure $media
      *
      * @return \Railken\Lem\Contracts\ResultContract
      */
-    public function uploadFileFromFilesystem(File $file, string $path)
+    public function uploadFileFromFilesystem(File $file, string $path, Closure $media = null)
     {
         $dir = sys_get_temp_dir();
 
@@ -89,7 +93,14 @@ class FileManager extends Manager
         $file->path = $filename;
         $file->save();
 
-        $file->addMedia($file->path)->toMediaCollection('default');
+        $mediaBuilder = $file->addMedia($file->path);
+
+        if ($media && is_callable($media)) {
+            $mediaBuilder = $media($mediaBuilder);
+        }
+
+
+        $mediaBuilder->toMediaCollection('default');
 
         $result = new Result();
         $result->setResources(Collection::make([$file]));
