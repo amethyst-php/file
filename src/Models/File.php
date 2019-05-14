@@ -60,7 +60,7 @@ class File extends Model implements EntityContract, HasMedia
             return null;
         }
 
-        return $this->media[0]->disk === 's3'
+        return $this->media[0]->disk === 's3' && !$this->public
             ? $this->media[0]->getTemporaryUrl(new \DateTime('+1 hour'))
             : $this->media[0]->getFullUrl($name);
     }
