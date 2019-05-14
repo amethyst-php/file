@@ -16,6 +16,7 @@ class CreateFilesTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('path')->nullable();
+            $table->boolean('public')->default(false);
             $table->string('token');
             $table->nullableMorphs('model');
             $table->timestamps();

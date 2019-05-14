@@ -32,6 +32,9 @@ class FileSchema extends Schema
                 ->setRelationKey('model_type')
                 ->setRelationName('model')
                 ->setRelations(app('amethyst')->getMorphRelationable('file', 'model')),
+            Attributes\BooleanAttribute::make('public')->setDefault(function ($entity) {
+                return false;
+            }),
             Attributes\CreatedAtAttribute::make(),
             Attributes\UpdatedAtAttribute::make(),
         ];

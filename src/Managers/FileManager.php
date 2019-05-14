@@ -84,19 +84,26 @@ class FileManager extends Manager
      */
     public function uploadFileFromFilesystem(File $file, string $path, Closure $media = null)
     {
-        $dir = sys_get_temp_dir();
+        if (!$file->public) {
+            $dir = sys_get_temp_dir();
+            $filename = $dir.'/'.Uuid::uuid4()->toString().'.'.$this->guessExtension($path);
+            rename($path, $filename);
+            $path = $filename;
+        }
 
-        $filename = $dir.'/'.Uuid::uuid4()->toString().'.'.$this->guessExtension($path);
-
-        rename($path, $filename);
-
-        $file->path = $filename;
+        $file->path = $path;
         $file->save();
 
         $mediaBuilder = $file->addMedia($file->path);
 
+        if ($file->public) {
+            $mediaBuilder->addCustomHeaders([
+                'visibility' => 'public',
+            ]);
+        }
+
         if ($media && is_callable($media)) {
-            $mediaBuilder = $media($mediaBuilder);
+            $media($mediaBuilder);
         }
 
 
