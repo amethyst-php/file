@@ -16,14 +16,8 @@ trait HasFileTrait
         return $this->morphMany(config('amethyst.file.data.file.model'), 'model');
     }
 
-    public function getFiles(array $tags)
+    public function getFiles()
     {
-        $collection = $this->files->filter(function ($file) use ($tags) {
-            return count(array_intersect($file->tags->map(function ($tag) {
-                return $tag->taxonomy->name;
-            })->toArray(), $tags)) > 0;
-        });
-
-        return $collection;
+        return $this->files;
     }
 }

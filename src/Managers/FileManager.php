@@ -97,29 +97,9 @@ class FileManager extends Manager
         return $result;
     }
 
-    public function assignToModel(File $file, EntityContract $entity, array $tagNames)
+    public function assignToModel(File $file, EntityContract $entity)
     {
         $result = new Result();
-
-        $taxonomyManager = new TaxonomyManager();
-        $taxonomableManager = new TaxonomableManager();
-
-        $parentTag = $taxonomyManager->findOrCreate([
-            'name' => 'files',
-        ])->getResource();
-
-        foreach ($tagNames as $tagName) {
-            $tag = $taxonomyManager->findOrCreate([
-                'name'      => $tagName,
-                'parent_id' => $parentTag->id,
-            ])->getResource();
-
-            $taxonomableManager->findOrCreate([
-                'taxonomy_id'      => $tag->id,
-                'taxonomable_type' => File::class,
-                'taxonomable_id'   => $file->id,
-            ]);
-        }
 
         $file->model()->associate($entity);
         $file->save();

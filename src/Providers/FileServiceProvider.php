@@ -20,7 +20,6 @@ class FileServiceProvider extends CommonServiceProvider
         $this->loadExtraRoutes();
 
         $this->app->register(\Spatie\MediaLibrary\MediaLibraryServiceProvider::class);
-        $this->app->register(\Railken\Amethyst\Providers\TaxonomyServiceProvider::class);
     }
 
     /**

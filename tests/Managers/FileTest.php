@@ -57,9 +57,9 @@ class FileTest extends BaseTest
         $this->assertEquals($manager->getRepository()->findByToken($resource->token)->id, $resource->id);
 
         // Assign the temporary file to a model
-        $manager->assignToModel($resource, $foo = Foo::create(), ['test']);
+        $manager->assignToModel($resource, $foo = Foo::create());
 
-        $files = $foo->getFiles(['test']);
+        $files = $foo->getFiles();
 
         $this->assertEquals($resource->getFullUrl(), $files[0]->getFullUrl());
     }

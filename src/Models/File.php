@@ -85,12 +85,4 @@ class File extends Model implements EntityContract, HasMedia
 
         return $media->getFullUrl();
     }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-     */
-    public function tags(): MorphMany
-    {
-        return $this->morphMany(config('amethyst.taxonomy.data.taxonomable.model'), 'taxonomable');
-    }
 }
