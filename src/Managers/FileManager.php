@@ -2,6 +2,7 @@
 
 namespace Railken\Amethyst\Managers;
 
+use Closure;
 use Illuminate\Support\Collection;
 use Railken\Amethyst\Common\ConfigurableManager;
 use Railken\Amethyst\Models\File;
@@ -9,7 +10,6 @@ use Railken\Lem\Contracts\EntityContract;
 use Railken\Lem\Manager;
 use Railken\Lem\Result;
 use Ramsey\Uuid\Uuid;
-use Closure;
 
 /**
  * @method \Railken\Amethyst\Repositories\FileRepository getRepository()
@@ -26,8 +26,8 @@ class FileManager extends Manager
     /**
      * Upload a file.
      *
-     * @param File  $file
-     * @param mixed $raw_file
+     * @param File    $file
+     * @param mixed   $raw_file
      * @param Closure $media
      *
      * @return \Railken\Lem\Contracts\ResultContract
@@ -46,8 +46,8 @@ class FileManager extends Manager
     /**
      * Upload file By content.
      *
-     * @param File   $file
-     * @param string $content
+     * @param File    $file
+     * @param string  $content
      * @param Closure $media
      *
      * @return \Railken\Lem\Contracts\ResultContract
@@ -76,8 +76,8 @@ class FileManager extends Manager
     /**
      * Upload a file from filesystem.
      *
-     * @param File   $file
-     * @param string $path
+     * @param File    $file
+     * @param string  $path
      * @param Closure $media
      *
      * @return \Railken\Lem\Contracts\ResultContract
@@ -108,7 +108,6 @@ class FileManager extends Manager
         if ($media && is_callable($media)) {
             $media($mediaBuilder);
         }
-
 
         $mediaBuilder->toMediaCollection('default');
 
