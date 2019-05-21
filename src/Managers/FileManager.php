@@ -60,6 +60,7 @@ class FileManager extends Manager
 
         file_put_contents($tmp, $content);
 
+
         $filename = $file->name;
 
         if (!$filename) {
@@ -70,7 +71,13 @@ class FileManager extends Manager
 
         rename($tmp, $filename);
 
-        return $this->uploadFileFromFilesystem($file, $filename, $media);
+        $result = $this->uploadFileFromFilesystem($file, $filename, $media);
+
+        if ($result->ok()) {
+            unlink($filename);
+        }
+
+        return $result;
     }
 
     /**
@@ -88,16 +95,19 @@ class FileManager extends Manager
 
         if (!$file->public) {
             $filename = $dir.'/'.Uuid::uuid4()->toString().'.'.$this->guessExtension($path);
+
+            rename($path, $filename);
         } else {
             $filename = $dir.'/'.$file->name;
-        }
 
-        rename($path, $filename);
+            copy($path, $filename);
+        }
 
         $file->path = $filename;
         $file->save();
 
         $mediaBuilder = $file->addMedia($file->path);
+
 
         if ($file->public) {
             $mediaBuilder->addCustomHeaders([
