@@ -60,7 +60,6 @@ class FileManager extends Manager
 
         file_put_contents($tmp, $content);
 
-
         $filename = $file->name;
 
         if (!$filename) {
@@ -107,7 +106,6 @@ class FileManager extends Manager
         $file->save();
 
         $mediaBuilder = $file->addMedia($file->path);
-
 
         if ($file->public) {
             $mediaBuilder->addCustomHeaders([
