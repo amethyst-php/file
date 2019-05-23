@@ -156,7 +156,9 @@ class FileManager extends Manager
      */
     public function findExtension(string $mimeType)
     {
-        $repository = new \Dflydev\ApacheMimeTypes\PhpRepository();
+        // $repository = new \Dflydev\ApacheMimeTypes\PhpRepository();
+        $repository = new \Railken\Amethyst\ApacheMimeTypes\PhpRepository();
+        $repository->addExtension('application/vnd.ms-office', ['xls', 'xlsx']);
 
         $extensions = $repository->findExtensions($mimeType);
 
