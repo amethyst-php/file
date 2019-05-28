@@ -49,7 +49,6 @@ class File extends Model implements EntityContract, HasMedia
      */
     public function getFullUrl(string $conversion = '')
     {
-
         if (!isset($this->media[0])) {
             return null;
         }

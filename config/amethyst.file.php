@@ -24,10 +24,10 @@ return [
             'attributes' => [
                 'type' => [
                     'options' => [
-                        'default'
-                    ]
-                ]
-            ]
+                        'default',
+                    ],
+                ],
+            ],
         ],
     ],
 

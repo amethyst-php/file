@@ -28,7 +28,7 @@ class FileSerializer extends Serializer
 
                 return [
                     'name' => basename($url),
-                    'url' => $url
+                    'url'  => $url,
                 ];
             }));
         }
