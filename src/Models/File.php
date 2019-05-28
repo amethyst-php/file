@@ -31,14 +31,6 @@ class File extends Model implements EntityContract, HasMedia
         parent::__construct($attributes);
     }
 
-    public function registerMediaConversions(Media $media = null)
-    {
-        $this->addMediaConversion('thumb')
-              ->width(368)
-              ->height(232)
-              ->sharpen(10);
-    }
-
     /**
      * @return MorphTo
      */
@@ -51,18 +43,20 @@ class File extends Model implements EntityContract, HasMedia
      * Get the full url to a original media file.
      *
      * @param string $name
+     * @param string $conversion
      *
      * @return string
      */
-    public function getFullUrl(string $name = '')
+    public function getFullUrl(string $conversion = '')
     {
+
         if (!isset($this->media[0])) {
             return null;
         }
 
         return $this->media[0]->disk === 's3' && !$this->public
-            ? $this->media[0]->getTemporaryUrl(new \DateTime('+1 hour'))
-            : $this->media[0]->getFullUrl($name);
+            ? $this->media[0]->getTemporaryUrl(new \DateTime('+1 hour'), $conversion)
+            : $this->media[0]->getFullUrl($conversion);
     }
 
     /**

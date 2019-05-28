@@ -21,6 +21,13 @@ return [
             'authorizer' => Railken\Amethyst\Authorizers\FileAuthorizer::class,
             'faker'      => Railken\Amethyst\Fakers\FileFaker::class,
             'manager'    => Railken\Amethyst\Managers\FileManager::class,
+            'attributes' => [
+                'type' => [
+                    'options' => [
+                        'default'
+                    ]
+                ]
+            ]
         ],
     ],
 

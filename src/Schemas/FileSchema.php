@@ -22,6 +22,7 @@ class FileSchema extends Schema
                     return Uuid::uuid4()->toString();
                 })
                 ->setRequired(true),
+            Attributes\EnumAttribute::make('type', config('amethyst.file.data.file.attributes.type.options')),
             Attributes\TextAttribute::make('path')
                 ->setFillable(false),
             Attributes\TextAttribute::make('token')->setDefault(function ($entity, $attribute) {

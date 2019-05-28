@@ -32,7 +32,7 @@ class FileServiceProvider extends CommonServiceProvider
         app('amethyst')->pushMorphRelation('taxonomable', 'taxonomable', 'file');
 
         \Illuminate\Database\Eloquent\Builder::macro('files', function (): MorphMany {
-            return app('amethyst')->createMacroMorphRelation($this, \Railken\Amethyst\Models\File::class, 'files', 'model');
+            return app('amethyst')->createMacroMorphRelation($this, config('amethyst.file.data.file.model'), 'files', 'model');
         });
     }
 

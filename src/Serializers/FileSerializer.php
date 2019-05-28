@@ -22,6 +22,17 @@ class FileSerializer extends Serializer
         $bag->set('url', $entity->getFullUrl());
         $bag->set('media', $entity->media->count() > 0 ? $entity->media[0]->toArray() : null);
 
+        if ($bag->get('media')) {
+            $bag->set('conversions', collect($entity->media[0]->getMediaConversionNames())->map(function ($conversionName) use ($entity) {
+                $url = $entity->getFullUrl($conversionName);
+
+                return [
+                    'name' => basename($url),
+                    'url' => $url
+                ];
+            }));
+        }
+
         return $bag;
     }
 }
