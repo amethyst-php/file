@@ -36,8 +36,6 @@ class FilesController extends RestManagerController
      */
     public function upload($id, Request $request)
     {
-        $this->iniByRequest($request);
-        
         $entity = $this->getEntityById($id);
 
         if (!$entity) {
