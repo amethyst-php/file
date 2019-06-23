@@ -72,7 +72,7 @@ class FileManager extends Manager
 
         $result = $this->uploadFileFromFilesystem($file, $filename, $media);
 
-        if ($result->ok()) {
+        if ($result->ok() && file_exists($filename)) {
             unlink($filename);
         }
 
