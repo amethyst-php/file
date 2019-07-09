@@ -1,6 +1,6 @@
 <?php
 
-namespace Railken\Amethyst\ApacheMimeTypes;
+namespace Amethyst\ApacheMimeTypes;
 
 class PhpRepository extends \Dflydev\ApacheMimeTypes\PhpRepository
 {

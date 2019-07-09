@@ -1,11 +1,11 @@
 <?php
 
-namespace Railken\Amethyst\Tests\Managers;
+namespace Amethyst\Tests\Managers;
 
-use Railken\Amethyst\Fakers\FileFaker;
-use Railken\Amethyst\Managers\FileManager;
-use Railken\Amethyst\Tests\BaseTest;
-use Railken\Amethyst\Tests\Laravel\App\Foo;
+use Amethyst\Fakers\FileFaker;
+use Amethyst\Managers\FileManager;
+use Amethyst\Tests\BaseTest;
+use Amethyst\Tests\Laravel\App\Foo;
 use Railken\Lem\Support\Testing\TestableBaseTrait;
 
 class FileTest extends BaseTest

@@ -1,10 +1,10 @@
 {
-    "name": "railken/amethyst-file",
+    "name": "amethyst/file",
     "keywords": ["laravel", "amethyst", "amethyst-file", "file"],
     "license": "MIT",
     "require": {
         "php": ">=7.1",
-        "railken/amethyst-common": "0.1.*",
+        "amethyst/common": "0.1.*",
         "spatie/laravel-medialibrary": "^7.0.0",
         "ramsey/uuid": "^3.8",
         "dflydev/apache-mime-types": "^1.0"
@@ -15,18 +15,18 @@
     },
     "autoload": {
         "psr-4" : {
-            "Railken\\Amethyst\\" : "src/"
+            "Amethyst\\" : "src/"
         }
     },
     "autoload-dev": {
         "psr-4": { 
-            "Railken\\Amethyst\\Tests\\": "tests/" 
+            "Amethyst\\Tests\\": "tests/" 
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Railken\\Amethyst\\Providers\\FileServiceProvider"
+                "Amethyst\\Providers\\FileServiceProvider"
             ]
         }
     }

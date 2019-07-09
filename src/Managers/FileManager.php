@@ -1,18 +1,18 @@
 <?php
 
-namespace Railken\Amethyst\Managers;
+namespace Amethyst\Managers;
 
 use Closure;
 use Illuminate\Support\Collection;
-use Railken\Amethyst\Common\ConfigurableManager;
-use Railken\Amethyst\Models\File;
+use Amethyst\Common\ConfigurableManager;
+use Amethyst\Models\File;
 use Railken\Lem\Contracts\EntityContract;
 use Railken\Lem\Manager;
 use Railken\Lem\Result;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @method \Railken\Amethyst\Repositories\FileRepository getRepository()
+ * @method \Amethyst\Repositories\FileRepository getRepository()
  */
 class FileManager extends Manager
 {
@@ -157,7 +157,7 @@ class FileManager extends Manager
     public function findExtension(string $mimeType)
     {
         // $repository = new \Dflydev\ApacheMimeTypes\PhpRepository();
-        $repository = new \Railken\Amethyst\ApacheMimeTypes\PhpRepository();
+        $repository = new \Amethyst\ApacheMimeTypes\PhpRepository();
         $repository->addExtension('application/vnd.ms-office', ['xls', 'xlsx']);
 
         $extensions = $repository->findExtensions($mimeType);

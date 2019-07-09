@@ -1,9 +1,9 @@
 <?php
 
-namespace Railken\Amethyst\Tests\Laravel\App;
+namespace Amethyst\Tests\Laravel\App;
 
 use Illuminate\Database\Eloquent\Model;
-use Railken\Amethyst\Traits\HasFileTrait;
+use Amethyst\Traits\HasFileTrait;
 use Railken\Lem\Contracts\EntityContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
