@@ -2,10 +2,10 @@
 
 namespace Amethyst\Managers;
 
-use Closure;
-use Illuminate\Support\Collection;
 use Amethyst\Common\ConfigurableManager;
 use Amethyst\Models\File;
+use Closure;
+use Illuminate\Support\Collection;
 use Railken\Lem\Contracts\EntityContract;
 use Railken\Lem\Manager;
 use Railken\Lem\Result;

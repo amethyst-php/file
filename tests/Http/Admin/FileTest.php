@@ -2,10 +2,10 @@
 
 namespace Amethyst\Tests\Http\Admin;
 
-use Illuminate\Http\UploadedFile;
 use Amethyst\Api\Support\Testing\TestableBaseTrait;
 use Amethyst\Fakers\FileFaker;
 use Amethyst\Tests\BaseTest;
+use Illuminate\Http\UploadedFile;
 
 class FileTest extends BaseTest
 {
