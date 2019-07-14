@@ -15,12 +15,12 @@ use Ramsey\Uuid\Uuid;
  * @method \Amethyst\Repositories\FileRepository getRepository()
  */
 /**
- * @method \Amethyst\Models\File newEntity()
- * @method \Amethyst\Schemas\FileSchema getSchema()
+ * @method \Amethyst\Models\File                 newEntity()
+ * @method \Amethyst\Schemas\FileSchema          getSchema()
  * @method \Amethyst\Repositories\FileRepository getRepository()
- * @method \Amethyst\Serializers\FileSerializer getSerializer()
- * @method \Amethyst\Validators\FileValidator getValidator()
- * @method \Amethyst\Authorizers\FileAuthorizer getAuthorizer()
+ * @method \Amethyst\Serializers\FileSerializer  getSerializer()
+ * @method \Amethyst\Validators\FileValidator    getValidator()
+ * @method \Amethyst\Authorizers\FileAuthorizer  getAuthorizer()
  */
 class FileManager extends Manager
 {
