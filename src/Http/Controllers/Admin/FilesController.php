@@ -57,6 +57,7 @@ class FilesController extends RestManagerController
             return $this->error(['errors' => $result->getSimpleErrors()]);
         }
 
-        return $this->success(['data' => $this->getManager()->getSerializer()->serialize($result->getResource())->toArray()], 201);
+        return $this->response($this->serialize($result->getResource(), $request), Response::HTTP_OK);
+
     }
 }
