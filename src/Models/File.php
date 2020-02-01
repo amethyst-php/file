@@ -67,10 +67,6 @@ class File extends Model implements EntityContract, HasMedia
     {
         $media = $this->media[0];
 
-        if ($media->disk === 's3') {
-            return $media->getTemporaryUrl(new \DateTime('+1 hour'));
-        }
-
         if (in_array($media->disk, ['local', 'public'], true)) {
             return $media->getPath();
         }

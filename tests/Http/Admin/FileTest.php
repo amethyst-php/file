@@ -43,6 +43,12 @@ class FileTest extends BaseTest
         $response = $this->callAndTest('POST', route('admin.file.upload', ['id' => $body->data->id]), [
             'file' => UploadedFile::fake()->image('text.txt'),
         ], 201);
+
         $body = json_decode($response->getContent());
+
+
+        $response = $this->callAndTest('GET', route('admin.file.download', ['id' => $body->data->id]), 201);
+        
+        print_r($response->getContent());
     }
 }

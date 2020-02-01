@@ -28,11 +28,11 @@ class FileSchema extends Schema
             Attributes\TextAttribute::make('token')->setDefault(function ($entity, $attribute) {
                 return $attribute->getManager()->getRepository()->generateToken();
             })->setFillable(false),
-            Attributes\EnumAttribute::make('model_type', app('amethyst')->getMorphListable('file', 'model')),
+            Attributes\EnumAttribute::make('model_type', app('amethyst')->getDataNames()),
             Attributes\MorphToAttribute::make('model_id')
                 ->setRelationKey('model_type')
                 ->setRelationName('model')
-                ->setRelations(app('amethyst')->getMorphRelationable('file', 'model')),
+                ->setRelations(app('amethyst')->getDataManagers()),
             Attributes\BooleanAttribute::make('public')->setDefault(function ($entity) {
                 return false;
             }),

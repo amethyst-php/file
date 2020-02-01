@@ -1,9 +1,8 @@
 <?php
 
-namespace Amethyst\Http\Controllers\Admin;
+namespace Amethyst\Http\Controllers;
 
 use Amethyst\Core\Http\Controllers\RestManagerController;
-use Amethyst\Core\Http\Controllers\Traits as RestTraits;
 use Amethyst\Managers\FileManager;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,11 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class FilesController extends RestManagerController
 {
-    use RestTraits\RestIndexTrait;
-    use RestTraits\RestCreateTrait;
-    use RestTraits\RestShowTrait;
-    use RestTraits\RestUpdateTrait;
-    use RestTraits\RestRemoveTrait;
 
     /**
      * The class of the manager.
@@ -58,6 +52,28 @@ class FilesController extends RestManagerController
         }
 
         return $this->response($this->serialize($result->getResource(), $request), Response::HTTP_OK);
+    }
 
+
+    /**
+     * The attributes that are fillable.
+     *
+     * @param mixed   $id
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function download($id, Request $request)
+    {
+        $entity = $this->getEntityById($id);
+
+        if (!$entity) {
+            return $this->response([], Response::HTTP_NOT_FOUND);
+        }
+
+        $manager = $this->getManager();
+
+        
+        return response()->stream($entity->downloadable());
     }
 }

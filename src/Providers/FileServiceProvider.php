@@ -6,6 +6,7 @@ use Amethyst\Core\Support\Router;
 use Amethyst\Core\Providers\CommonServiceProvider;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
+use Amethyst\Http\Controllers\FilesController;
 
 class FileServiceProvider extends CommonServiceProvider
 {
@@ -16,32 +17,12 @@ class FileServiceProvider extends CommonServiceProvider
     {
         parent::register();
 
-        $this->loadExtraRoutes();
-
         $this->app->register(\Spatie\MediaLibrary\MediaLibraryServiceProvider::class);
-    }
 
-    /**
-     * @inherit
-     */
-    public function boot()
-    {
-        parent::boot();
-
-        app('amethyst')->pushMorphRelation('taxonomable', 'taxonomable', 'file');
-    }
-
-    /**
-     * Load extras routes.
-     */
-    public function loadExtraRoutes()
-    {
-        $config = Config::get('amethyst.file.http.admin.file');
-        if (Arr::get($config, 'enabled')) {
-            Router::group('admin', Arr::get($config, 'router'), function ($router) use ($config) {
-                $controller = Arr::get($config, 'controller');
-                $router->post('/{id}/upload', ['as' => 'upload', 'uses' => $controller.'@upload']);
-            });
-        }
+        app('amethyst.router')->routes('file', function ($router) use ($config) {
+            $controller = FilesController::class;
+            $router->post('/{id}/upload', ['as' => 'upload', 'uses' => $controller.'@upload']);
+            $router->post('/{id}/download', ['as' => 'download', 'uses' => $controller.'@download']);
+        });
     }
 }

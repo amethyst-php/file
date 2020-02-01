@@ -30,7 +30,9 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
             $table->timestamps();
         });
 
-        app('amethyst')->pushMorphRelation('file', 'model', 'foo');
+        app('amethyst')->ini();
+        app('amethyst')->getDataNames();
+        app('amethyst')->getDataManagers();
     }
 
     protected function getPackageProviders($app)
