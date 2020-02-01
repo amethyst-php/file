@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class FilesController extends RestManagerController
 {
-
     /**
      * The class of the manager.
      *
@@ -54,7 +53,6 @@ class FilesController extends RestManagerController
         return $this->response($this->serialize($result->getResource(), $request), Response::HTTP_OK);
     }
 
-
     /**
      * The attributes that are fillable.
      *
@@ -73,7 +71,6 @@ class FilesController extends RestManagerController
 
         $manager = $this->getManager();
 
-        
         return response()->stream($entity->downloadable());
     }
 }
