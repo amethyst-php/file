@@ -28,7 +28,7 @@ class FileSchema extends Schema
             Attributes\TextAttribute::make('token')->setDefault(function ($entity, $attribute) {
                 return $attribute->getManager()->getRepository()->generateToken();
             })->setFillable(false),
-            Attributes\EnumAttribute::make('model_type', app('amethyst')->getDataNames()),
+            \Amethyst\Core\Attributes\DataNameAttribute::make('model_type'),
             Attributes\MorphToAttribute::make('model_id')
                 ->setRelationKey('model_type')
                 ->setRelationName('model')
