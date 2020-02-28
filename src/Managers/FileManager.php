@@ -113,6 +113,10 @@ class FileManager extends Manager
         $file->path = $filename;
         $file->save();
 
+        foreach ($file->media as $media) {
+            $media->delete();
+        }
+
         $mediaBuilder = $file->addMedia($file->path);
 
         if ($file->public) {
