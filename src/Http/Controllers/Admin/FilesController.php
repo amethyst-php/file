@@ -13,11 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class FilesController extends RestManagerController
 {
-    use RestTraits\RestIndexTrait;
-    use RestTraits\RestCreateTrait;
-    use RestTraits\RestShowTrait;
-    use RestTraits\RestUpdateTrait;
-    use RestTraits\RestRemoveTrait;
+    use RestTraits\RestCommonTrait;
 
     /**
      * The class of the manager.
