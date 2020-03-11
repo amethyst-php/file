@@ -28,11 +28,6 @@ class FileSchema extends Schema
             Attributes\TextAttribute::make('token')->setDefault(function ($entity, $attribute) {
                 return $attribute->getManager()->getRepository()->generateToken();
             })->setFillable(false),
-            \Amethyst\Core\Attributes\DataNameAttribute::make('model_type'),
-            Attributes\MorphToAttribute::make('model_id')
-                ->setRelationKey('model_type')
-                ->setRelationName('model')
-                ->setRelations(app('amethyst')->getDataManagers()),
             Attributes\BooleanAttribute::make('public')->setDefault(function ($entity) {
                 return false;
             }),

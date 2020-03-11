@@ -32,14 +32,6 @@ class File extends Model implements EntityContract, HasMedia
     }
 
     /**
-     * @return MorphTo
-     */
-    public function model(): MorphTo
-    {
-        return $this->morphTo();
-    }
-
-    /**
      * Get the full url to a original media file.
      *
      * @param string $name
