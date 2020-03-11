@@ -113,7 +113,8 @@ class FileManager extends Manager
         $file->path = $filename;
         $file->save();
 
-        foreach ($file->media as $media) {
+        foreach ($file->media as $key => $media) {
+            $file->media->forget($key);
             $media->delete();
         }
 
