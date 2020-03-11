@@ -4,7 +4,6 @@ namespace Amethyst\Models;
 
 use Amethyst\Core\ConfigurableModel;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Railken\Lem\Contracts\EntityContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
