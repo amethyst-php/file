@@ -6,11 +6,13 @@ use Amethyst\Core\Http\Controllers\RestManagerController;
 use Amethyst\Managers\FileManager;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Railken\LaraEye\Exceptions\FilterSyntaxException;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @method \Amethyst\Managers\FileManager getManager()
  */
-class FilesController extends RestManagerController
+class FileController extends RestManagerController
 {
     /**
      * The class of the manager.
@@ -22,18 +24,21 @@ class FilesController extends RestManagerController
     /**
      * The attributes that are fillable.
      *
-     * @param mixed   $id
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function upload($id, Request $request)
+    public function upload(Request $request)
     {
-        $entity = $this->getEntityById($id);
+        $query = $this->getQuery();
 
-        if (!$entity) {
-            return $this->response([], Response::HTTP_NOT_FOUND);
+        try {
+            $this->filterQuery($query, $request);
+        } catch (FilterSyntaxException $e) {
+            return $this->error(['code' => 'QUERY_SYNTAX_ERROR', 'message' => $e->getMessage()]);
         }
+
+        $entity = $query->first();
 
         $manager = $this->getManager();
 
@@ -57,11 +62,12 @@ class FilesController extends RestManagerController
      * The attributes that are fillable.
      *
      * @param mixed   $id
+     * @param mixed   $name
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function download($id, Request $request)
+    public function stream($id, $name, Request $request)
     {
         $entity = $this->getEntityById($id);
 
@@ -71,6 +77,8 @@ class FilesController extends RestManagerController
 
         $manager = $this->getManager();
 
-        return response()->stream($entity->downloadable());
+        return response()->file($entity->downloadable(), [
+          'Content-Disposition' => 'inline; filename="'. $entity->name .'"'
+        ]);
     }
 }

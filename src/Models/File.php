@@ -44,9 +44,15 @@ class File extends Model implements EntityContract, HasMedia
             return null;
         }
 
-        return $this->media[0]->disk === 's3' && !$this->public
-            ? $this->media[0]->getTemporaryUrl(new \DateTime('+1 hour'), $conversion)
-            : $this->media[0]->getFullUrl($conversion);
+        $media = $this->media[0];
+
+        if (in_array($media->disk, ['local', 'public'], true)) {
+            return route('app.file.upload.stream', ['id' => $this->id, 'name' => $this->name]);
+        }
+
+        return $media->disk === 's3' && !$this->public
+            ? $media->getTemporaryUrl(new \DateTime('+1 hour'), $conversion)
+            : $media->getFullUrl($conversion);
     }
 
     /**

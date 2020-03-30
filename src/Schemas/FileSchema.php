@@ -18,16 +18,13 @@ class FileSchema extends Schema
         return [
             Attributes\IdAttribute::make(),
             Attributes\TextAttribute::make('name')
-                ->setDefault(function ($entity, $attribute) {
-                    return Uuid::uuid4()->toString();
-                })
                 ->setRequired(true),
-            Attributes\EnumAttribute::make('type', config('amethyst.file.data.file.attributes.type.options')),
+            // Attributes\EnumAttribute::make('type', config('amethyst.file.data.file.attributes.type.options')),
             Attributes\TextAttribute::make('path')
-                ->setFillable(false),
+                ->setFillable(false)->setHidden(true),
             Attributes\TextAttribute::make('token')->setDefault(function ($entity, $attribute) {
                 return $attribute->getManager()->getRepository()->generateToken();
-            })->setFillable(false),
+            })->setFillable(false)->setHidden(true),
             Attributes\BooleanAttribute::make('public')->setDefault(function ($entity) {
                 return false;
             }),
