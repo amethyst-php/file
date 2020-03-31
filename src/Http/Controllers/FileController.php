@@ -72,7 +72,7 @@ class FileController extends RestManagerController
         $entity = $this->getEntityById($id);
 
         if (!$entity) {
-            return $this->response([], Response::HTTP_NOT_FOUND);
+            return abort(404);
         }
 
         $manager = $this->getManager();
