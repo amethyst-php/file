@@ -5,9 +5,8 @@ namespace Amethyst\Http\Controllers;
 use Amethyst\Core\Http\Controllers\RestManagerController;
 use Amethyst\Managers\FileManager;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Railken\LaraEye\Exceptions\FilterSyntaxException;
-use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @method \Amethyst\Managers\FileManager getManager()
@@ -78,7 +77,7 @@ class FileController extends RestManagerController
         $manager = $this->getManager();
 
         return response()->file($entity->downloadable(), [
-          'Content-Disposition' => 'inline; filename="'. $entity->name .'"'
+          'Content-Disposition' => 'inline; filename="'.$entity->name.'"',
         ]);
     }
 }

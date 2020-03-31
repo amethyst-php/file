@@ -4,7 +4,6 @@ namespace Amethyst\Schemas;
 
 use Railken\Lem\Attributes;
 use Railken\Lem\Schema;
-use Ramsey\Uuid\Uuid;
 
 class FileSchema extends Schema
 {

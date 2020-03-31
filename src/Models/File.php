@@ -8,7 +8,6 @@ use Railken\Lem\Contracts\EntityContract;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\Models\Media;
-use Lcobucci\JWT\Parser;
 
 /**
  * @property \Spatie\MediaLibrary\Models\Media $media
@@ -52,12 +51,11 @@ class File extends Model implements EntityContract, HasMedia
         if (in_array($media->disk, ['local', 'public'], true)) {
             $url = route('app.file.upload.stream', ['id' => $this->id, 'name' => $this->name]);
 
-
             $user = \Illuminate\Support\Facades\Auth::user();
 
             if ($user && !$this->public) {
                 $path = parse_url($url, PHP_URL_PATH);
-                $url .= "?token=".encrypt($path.":".$user->token()->id);
+                $url .= '?token='.encrypt($path.':'.$user->token()->id);
             }
 
             return $url;

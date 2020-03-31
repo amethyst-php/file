@@ -3,9 +3,9 @@
 namespace Amethyst\Providers;
 
 use Amethyst\Core\Providers\CommonServiceProvider;
+use Amethyst\Core\Support\Router;
 use Amethyst\Http\Controllers\FilesController;
 use Illuminate\Support\Arr;
-use Amethyst\Core\Support\Router;
 use Illuminate\Support\Facades\Config;
 
 class FileServiceProvider extends CommonServiceProvider
