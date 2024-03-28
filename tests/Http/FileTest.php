@@ -38,7 +38,7 @@ class FileTest extends Base
     public function testHttpUpload()
     {
         $nameFile = 'lorem';
-        
+
         $response = $this->callAndTest('POST', route('data.create', ['name' => 'file']), ['name' => $nameFile], 201);
         $body = json_decode($response->getContent());
 
