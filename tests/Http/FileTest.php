@@ -37,7 +37,9 @@ class FileTest extends Base
      */
     public function testHttpUpload()
     {
-        $response = $this->callAndTest('POST', route('data.create', ['name' => 'file']), ['name' => 'yolo'], 201);
+        $nameFile = 'lorem';
+        
+        $response = $this->callAndTest('POST', route('data.create', ['name' => 'file']), ['name' => $nameFile], 201);
         $body = json_decode($response->getContent());
 
         $response = $this->callAndTest('POST', route('app.file.upload', ['id' => $body->data->id]), [
@@ -46,7 +48,7 @@ class FileTest extends Base
 
         $body = json_decode($response->getContent());
 
-        $response = $this->callAndTest('GET', route('app.file.stream', ['id' => $body->data->id, 'name' => 'yolo']), [], 200);
+        $response = $this->callAndTest('GET', route('app.file.stream', ['id' => $body->data->id, 'name' => $nameFile]), [], 200);
     }
 
 }
