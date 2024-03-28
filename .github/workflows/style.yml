@@ -16,7 +16,7 @@ jobs:
         uses: shivammathur/setup-php@master #https://github.com/shivammathur/setup-php
         with:
           php-version: 8.3
-          extension-csv: mbstring, dom, fileinfo, mysql, zip
+          extension: mbstring, dom, fileinfo, mysql, zip
           coverage: xdebug #optional
       - name: Install Composer dependencies
         run: |
