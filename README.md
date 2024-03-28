@@ -1,7 +1,6 @@
 # amethyst-file
 
 [![Action Status](https://github.com/amethyst-php/file/workflows/Test/badge.svg)](https://github.com/amethyst-php/file/actions)
-
 [![Amethyst](https://img.shields.io/badge/Package-Amethyst-7e57c2)](https://github.com/amethyst-php/amethyst)
 
 # Requirements
