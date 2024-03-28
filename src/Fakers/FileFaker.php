@@ -16,6 +16,7 @@ class FileFaker extends Faker
         $faker = Factory::create();
 
         $bag = new Bag();
+        $bag->set('name', $faker->name);
 
         return $bag;
     }

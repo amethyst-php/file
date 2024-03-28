@@ -4,11 +4,11 @@ namespace Amethyst\Tests\Managers;
 
 use Amethyst\Fakers\FileFaker;
 use Amethyst\Managers\FileManager;
-use Amethyst\Tests\BaseTest;
+use Amethyst\Tests\Base;
 use Amethyst\Tests\Laravel\App\Foo;
 use Railken\Lem\Support\Testing\TestableBaseTrait;
 
-class FileTest extends BaseTest
+class FileTest extends Base
 {
     use TestableBaseTrait;
 
@@ -45,10 +45,15 @@ class FileTest extends BaseTest
 
         $resource = $manager->create(FileFaker::make()->parameters())->getResource();
 
+
         // Create a temporary file.
         $result = $manager->uploadFileByContent($resource, 'test');
         $result = $manager->uploadFile($resource, $path);
 
+        $resource = $result->getResource();
+
+
+        $resource->refresh();
         $this->assertEquals(true, $result->ok());
 
         $this->assertEquals(true, filter_var($resource->getFullUrl(), FILTER_VALIDATE_URL) ? true : false);
@@ -56,11 +61,5 @@ class FileTest extends BaseTest
         // Retrieve the temporary file by token
         $this->assertEquals($manager->getRepository()->findByToken($resource->token)->id, $resource->id);
 
-        // Assign the temporary file to a model
-        $manager->assignToModel($resource, $foo = Foo::create());
-
-        $files = $foo->getFiles();
-
-        $this->assertEquals($resource->getFullUrl(), $files[0]->getFullUrl());
     }
 }

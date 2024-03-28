@@ -5,7 +5,7 @@ namespace Amethyst\Tests;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 
-abstract class BaseTest extends \Orchestra\Testbench\TestCase
+abstract class Base extends \Orchestra\Testbench\TestCase
 {
     /**
      * Setup the test environment.

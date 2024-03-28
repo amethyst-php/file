@@ -1,13 +1,13 @@
 <?php
 
-namespace Amethyst\Tests\Http\Admin;
+namespace Amethyst\Tests\Http;
 
 use Amethyst\Core\Support\Testing\TestableBaseTrait;
 use Amethyst\Fakers\FileFaker;
-use Amethyst\Tests\BaseTest;
+use Amethyst\Tests\Base;
 use Illuminate\Http\UploadedFile;
 
-class FileTest extends BaseTest
+class FileTest extends Base
 {
     use TestableBaseTrait;
 
@@ -23,31 +23,30 @@ class FileTest extends BaseTest
      *
      * @var string
      */
-    protected $group = 'admin';
+    protected $group = 'data.file';
 
     /**
      * Base Route.
      *
      * @var string
      */
-    protected $route = 'admin.file';
+    protected $route = 'data.file';
 
     /**
      * Test upload.
      */
     public function testHttpUpload()
     {
-        $response = $this->callAndTest('POST', route('admin.file.create'), [], 201);
+        $response = $this->callAndTest('POST', route('data.create', ['name' => 'file']), ['name' => 'yolo'], 201);
         $body = json_decode($response->getContent());
 
-        $response = $this->callAndTest('POST', route('admin.file.upload', ['id' => $body->data->id]), [
+        $response = $this->callAndTest('POST', route('app.file.upload', ['id' => $body->data->id]), [
             'file' => UploadedFile::fake()->image('text.txt'),
-        ], 201);
+        ], 200);
 
         $body = json_decode($response->getContent());
 
-        $response = $this->callAndTest('GET', route('admin.file.download', ['id' => $body->data->id]), 201);
-
-        print_r($response->getContent());
+        $response = $this->callAndTest('GET', route('app.file.stream', ['id' => $body->data->id, 'name' => 'yolo']), [], 200);
     }
+
 }

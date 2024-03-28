@@ -15,7 +15,7 @@ return [
             'controller' => Amethyst\Http\Controllers\FileController::class,
             'router'     => [
                 'prefix' => '/data/file',
-                'as'     => 'file.upload.',
+                'as'     => 'file.',
             ],
         ],
     ],

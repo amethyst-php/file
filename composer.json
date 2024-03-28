@@ -3,11 +3,11 @@
     "keywords": ["laravel", "amethyst", "amethyst-file", "file"],
     "license": "MIT",
     "require": {
-        "php": ">=7.2",
-        "amethyst/core": "0.2.*",
-        "spatie/laravel-medialibrary": "^7.0.0",
-        "ramsey/uuid": "^3.8",
-        "dflydev/apache-mime-types": "^1.0"
+        "php": ">=8.2",
+        "amethyst/core": "0.3.*",
+        "dflydev/apache-mime-types": "^1.0",
+        "ramsey/uuid": "^3 || ^4",
+        "spatie/laravel-medialibrary": "^11.4"
     },
     "require-dev": {
         "phpunit/phpunit": "*",

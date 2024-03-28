@@ -1,12 +1,12 @@
 # amethyst-file
 
-[![Action Status](https://github.com/amethyst-php/file/workflows/test/badge.svg)](https://github.com/amethyst-php/file/actions)
+[![Action Status](https://github.com/amethyst-php/file/workflows/Test/badge.svg)](https://github.com/amethyst-php/file/actions)
 
-[Amethyst](https://github.com/amethyst-php/amethyst) package.
+[![Amethyst](https://img.shields.io/badge/Package-Amethyst-7e57c2)](https://github.com/amethyst-php/amethyst)
 
 # Requirements
 
-PHP 7.1 and later.
+PHP 8.2 and later.
 
 ## Installation
 

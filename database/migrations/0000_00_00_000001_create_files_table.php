@@ -19,7 +19,6 @@ class CreateFilesTable extends Migration
             $table->string('path')->nullable();
             $table->boolean('public')->default(false);
             $table->string('token');
-            $table->nullableMorphs('model');
             $table->timestamps();
         });
     }

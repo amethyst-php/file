@@ -5,9 +5,9 @@ namespace Amethyst\Models;
 use Amethyst\Core\ConfigurableModel;
 use Illuminate\Database\Eloquent\Model;
 use Railken\Lem\Contracts\EntityContract;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\HasMedia;
 
 /**
  * @property \Spatie\MediaLibrary\Models\Media $media
@@ -16,7 +16,7 @@ use Spatie\MediaLibrary\Models\Media;
  */
 class File extends Model implements EntityContract, HasMedia
 {
-    use HasMediaTrait;
+    use InteractsWithMedia;
     use ConfigurableModel;
 
     /**
@@ -49,7 +49,7 @@ class File extends Model implements EntityContract, HasMedia
         // For security issues the url of the file will be streamed
         // If the file is not public a token will be attached for authentication
         if (in_array($media->disk, ['local', 'public'], true)) {
-            $url = route('app.file.upload.stream', ['id' => $this->id, 'name' => $this->name]);
+            $url = route('app.file.stream', ['id' => $this->id, 'name' => $this->name]);
 
             $user = \Illuminate\Support\Facades\Auth::user();
 
