@@ -25,7 +25,7 @@ abstract class Base extends \Orchestra\Testbench\TestCase
         $this->artisan('migrate');
         Schema::dropIfExists('foo');
         Schema::create('foo', function ($table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name')->nullable();
             $table->timestamps();
         });

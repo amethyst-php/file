@@ -13,7 +13,7 @@ class CreateFilesTable extends Migration
     public function up()
     {
         Schema::create(Config::get('amethyst.file.data.file.table'), function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name')->nullable();
             $table->string('type')->nullable();
             $table->string('path')->nullable();
