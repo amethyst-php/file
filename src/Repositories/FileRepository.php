@@ -26,7 +26,7 @@ class FileRepository extends Repository
     public function generateToken()
     {
         do {
-            $token = sha1(microtime());
+            $token = sha1(rand() * rand());
         } while ($this->newQuery()->where(['token' => $token])->count() > 0);
 
         return $token;
